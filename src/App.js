@@ -8,17 +8,29 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      id: null
+      userID: null
     }
   }
 
+  setID = (loginID) => {
+    this.setState({
+      userID: loginID
+    })
+  }
+
   render() {
+    console.log(this.state.userID)
     return (
       <div className="App">
-        <p> Hello World!</p>
+        <h1>Habit Checker</h1>
         <BrowserRouter>
           <Switch>
-            <Route path="/LogIn" component={LogIn}/>
+            <Route exact path="/LogIn" render={(props) => 
+              (<LogIn
+                userID={this.userID}
+                setID={this.setID}/>
+              )}
+            />
             <Route path ="/Habits" component={Habits}/>
             <Redirect from="/" to="/LogIn"/>
           </Switch>

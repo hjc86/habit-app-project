@@ -37,6 +37,7 @@ router.get('/users', function (req, res, next){
 
 router.post('/login', async function(req, res, next) {
     console.log(req.body);
+    const errorMessage = {message: 'Username or password is incorrect.'};
     db.checkUserExists(req.body.username)
     .then(async function(users){
         if(!(users[0].count > 0)){
@@ -44,7 +45,7 @@ router.post('/login', async function(req, res, next) {
         } else {
             let response = await db.checkUsernamePassword(req.body)
             console.log('user ID in index response', response);
-            response === false ? res.send('Username or password is incorrect.') : res.send(response)
+            response === false ? res.send(errorMessage) : res.send(response)
         }
     })
     .catch(function(error){

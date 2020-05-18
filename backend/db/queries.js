@@ -10,8 +10,6 @@ function addUser(user){
     return users().insert(user, 'id');
 }
 
-
-//Matt. just in case
 function getSingleUser(user_id){
     return users().where('id', parseInt(user_id)).first();
 }
@@ -21,28 +19,25 @@ function getAllUsers(){
 }
 
 function checkUserExists(username){
-    // console.log("count of users", users().count('username').where('username',username))
-    
-    // if(users().where('username', username).count() === 1){
-    //     return true
-    // } else {
-    //     return false
-    // }
-    return knex.raw(`select count(username) as count from users where username = '${username}';`);
-    
-
-
+    return users().count('username as count').where('username', username);
 }
 
-function checkUsernamePassword(user){
+function checkIdExists(id){
+    return users().count('id as count').where('id', id);
+}
+
+async function checkUsernamePassword(user){
     let username = user.username;
     let password = user.password;
-    let query = users().where('username', username).first()
-    if(query.password === password) {
-        return query.id
-    } else {
-        return false
-    }
+    let response = await users().where('username', username).first()
+    console.log('response:' ,response);
+    return await response.password === password ? response.id : false;
+
+    // users().where('username', username).first()
+    // .then(async function(users){
+    //     console.log("users after then", users)
+    //     return await users.password === password ? users.id : false;
+    // })
 }
 
 function deleteUser(user_id){
@@ -79,6 +74,15 @@ function deleteHabit(habit_id){
     return habits().where('id', parseInt(habit_id)).del();
 }
 
+function checkHabitIdExists(id){
+    return habits().count('id as count').where('id', id);
+}
+
+function checkHabitExists(habit_name){
+    return habits().count('habit_name as count').where('habit_name', habit_name);
+}
+
+
 module.exports = {
     getAllUsers: getAllUsers,
     getSingleUser: getSingleUser,
@@ -91,5 +95,8 @@ module.exports = {
     updateHabit: updateHabit,
     getAllHabits: getAllHabits,
     getSingleHabit: getSingleHabit,
-    deleteHabit: deleteHabit
+    deleteHabit: deleteHabit,
+    checkIdExists : checkIdExists,
+    checkHabitIdExists: checkHabitIdExists,
+    checkHabitExists: checkHabitExists
 }

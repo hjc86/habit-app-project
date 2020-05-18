@@ -101,8 +101,8 @@ router.put('/users', function(req, res, next){
 
 /////////////////////////////////HABIT ROUTES
 
-router.get("/allHabits/:id", function(req, res, next){
-    db.getAllHabits(req.params.id)
+router.get("/allHabits/:userID", function(req, res, next){
+    db.getAllHabits(req.params.userID)
     .then((habits) => {
         res.status(200).json(habits);
     }).catch((error) => {

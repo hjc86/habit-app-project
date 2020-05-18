@@ -13,7 +13,7 @@ router.post('/users', function (req, res, next) {
         } else{
             db.addUser(req.body)
             .then(function(users){
-                res.send('User Created')            
+                res.send('User Created')
             })
             .catch(function(error) {
                 next(error);

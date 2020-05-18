@@ -35,11 +35,22 @@ router.get('/users', function (req, res, next){
     });
 })
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', async function(req, res, next) {
     console.log(req.body);
-    let response = db.checkUsernamePassword(req.body)
-    console.log('users in index response',response);
-    res.send(response)
+    db.checkUserExists(req.body.username)
+    .then(async function(users){
+        if(!(users[0].count > 0)){
+            res.send('Username or password is incorrect.')
+        } else {
+            let response = await db.checkUsernamePassword(req.body)
+            console.log('user ID in index response', response);
+            response === false ? res.send('Username or password is incorrect.') : res.send(response)
+        }
+    })
+    .catch(function(error){
+        next(error);
+    });
+  
 })
 
 router.get('/users/:id', function (req, res, next){

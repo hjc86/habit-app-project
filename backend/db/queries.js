@@ -29,15 +29,9 @@ function checkIdExists(id){
 async function checkUsernamePassword(user){
     let username = user.username;
     let password = user.password;
-    let response = await users().where('username', username).first()
-    console.log('response:' ,response);
-    return await response.password === password ? response.id : false;
-
-    // users().where('username', username).first()
-    // .then(async function(users){
-    //     console.log("users after then", users)
-    //     return await users.password === password ? users.id : false;
-    // })
+    let response = await users().where('username', username).first();
+    console.log('response in queries: ', response);
+    return response.password === password ? `${response.id}` : false;
 }
 
 function deleteUser(user_id){

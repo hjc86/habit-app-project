@@ -7,10 +7,13 @@ import '../css/Modal.css'
 
 
 
-class HabitModal extends React.Component {
+class UpdateModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            habit_name: this.props.data.habit_name,
+            target_value: this.props.data.target_value,
+            frequency: this.props.data.frequency
         }
     }
 
@@ -37,23 +40,17 @@ handleFrequencyChange = (e) => {
 handleSubmit = async (e) => {
     e.preventDefault();
 
-    let start_date = new Date(this.state.start_date).getTime() / 1000;
-    let end_date = this.state.frequency * 86400 + start_date;
+    // let start_date = new Date(this.state.start_date).getTime() / 1000;
+    // let end_date = this.state.frequency * 86400 + start_date;
 
     const url = 'http://localhost:3001/habits';
     const response = await fetch(url, {
-        method: 'post',
+        method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            user_id: this.props.user_id,
+            id: this.props.data.id,
             habit_name: this.state.habit_name,
-            current_value: 0,
-            target_value: this.state.target_value,
-            frequency: this.state.frequency,
-            start_date: start_date,
-            end_date : end_date,
-            streak: 0,
-            completed: false
+            target_value: this.state.target_value
             })
         })
     this.props.onHide();
@@ -65,6 +62,7 @@ handleSubmit = async (e) => {
 
 render(){
     console.log(this.state)
+    console.log(this.state.habit_name)
     return (
       <Modal
         {...this.props}
@@ -74,35 +72,30 @@ render(){
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Create new habit
+            Update habit
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form>
-                <Form.Group as={Row} onChange={this.handleNameChange}>
+                <Form.Group as={Row} onChange={this.handleNameChange} >
                     <Form.Label>
                         Habit Name
                     </Form.Label>
-                    <Form.Control type="text" placeholder="Enter habit name" />
+                    <Form.Control type="text" defaultValue={this.props.data.habit_name}/>
                 </Form.Group>  
                 <Form.Group as={Row} onChange={this.handleTargetChange}>
                     <Form.Label>
                         Target Value
                     </Form.Label>
-                    <Form.Control type="number" placeholder="Enter target value" />
+                    <Form.Control type="number" defaultValue={this.props.data.target_value} />
                 </Form.Group>  
-                <Form.Group as={Row} onChange={this.handleDateChange}>
-                    <Form.Label>
-                        Start Date
-                    </Form.Label>
-                    <Form.Control type="date" placeholder="Enter start date" />
-                </Form.Group>     
-                <Form.Group as={Row} onChange={this.handleFrequencyChange}>
+                {/* <Form.Group as={Row} onChange={this.handleFrequencyChange}>
                     <Form.Label>
                         Frequency (days)
                     </Form.Label>
-                    <Form.Control type="number" placeholder="Enter frequency" />
-                </Form.Group>          
+                    <Form.Control type="number" defaultValue={this.props.data.frequency} />
+                </Form.Group>           */}
+
 
 
             </Form>
@@ -120,4 +113,4 @@ render(){
   
   
 
-export default HabitModal;
+export default UpdateModal;

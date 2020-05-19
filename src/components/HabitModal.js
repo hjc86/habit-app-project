@@ -60,9 +60,6 @@ handleSubmit = async (e) => {
     this.props.updateState();
 }
 
-
-
-
 render(){
     console.log(this.state)
     return (
@@ -115,9 +112,6 @@ render(){
     );
   }
 }
-  
-  
-  
-  
+
 
 export default HabitModal;

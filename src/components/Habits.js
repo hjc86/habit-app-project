@@ -60,7 +60,6 @@ class Habits extends React.Component {
                 <h2>{this.props.data.id}</h2>
                 <h2>{this.props.data.completed}</h2>
                 <Button onClick={this.handleClickDelete}>Delete</Button>
-                <Button onClick={this.handleClickUpdate}>Update</Button>
                 <Button onClick={this.handleClickComplete}>Complete</Button>
                 <Button onClick={() => this.setState({ modalShow: true })}> Update!</Button>
 

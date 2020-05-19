@@ -73,7 +73,13 @@ router.delete('/users', function(req, res, next){
         .catch(function(error){
         next(error);
         });
-        
+    db.deleteAllHabits(id)
+        .then(function(users){
+            res.send(`Habits deleted with user id: ${id}`)
+        })
+        .catch(function(error){
+        next(error);
+        });
 })
 
 router.put('/users', function(req, res, next){

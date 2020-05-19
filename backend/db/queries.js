@@ -67,7 +67,9 @@ function getSingleHabit(habit_id){
 function deleteHabit(habit_id){
     return habits().where('id', parseInt(habit_id)).del();
 }
-
+ function deleteAllHabits(user_id){
+     return habits().where('user_id', parseInt(user_id)).del();
+ }
 function checkHabitIdExists(id){
     return habits().count('id as count').where('id', id);
 }
@@ -92,5 +94,6 @@ module.exports = {
     deleteHabit: deleteHabit,
     checkIdExists : checkIdExists,
     checkHabitIdExists: checkHabitIdExists,
-    checkHabitExists: checkHabitExists
+    checkHabitExists: checkHabitExists,
+    deleteAllHabits: deleteAllHabits
 }

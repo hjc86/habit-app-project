@@ -64,9 +64,13 @@ class Dashboard extends React.Component {
           
         <div>
           <Navbar id="navbar" bg="dark" variant="dark">
+          <Navbar.Brand href="/">
+            HabitCheck
+          </Navbar.Brand>
             <Nav>
-            <Button onClick={this.handleClickAccount}>Account</Button>
-            <Button onClick={this.handleClickLogout}>Logout</Button>
+            <Button variant="outline-dark" onClick={this.handleClickAccount}>Account</Button>
+            {'    '}
+            <Button variant="outline-dark" onClick={this.handleClickLogout}>Logout</Button>
             </Nav>
           </Navbar>
           

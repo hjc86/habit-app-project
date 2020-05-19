@@ -2,7 +2,8 @@ import React from "react";
 import {Router, Redirect } from "react-router-dom";
 import Habits from "./Habits"; 
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button"
+import Button from "react-bootstrap/Button";
+import '../LogIn.css'
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class LogIn extends React.Component {
         let password = e.target.value;
         this.setState({ password: password })
     }
-
+e
     handleClickCreate = async (event) => {
         event.preventDefault();
         console.log(event.target);
@@ -60,14 +61,16 @@ class LogIn extends React.Component {
 
     render(){
         return (
-            <div>
-                <Form>
+            <div className="formDiv">
+                <Form className="form" >
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" />
+                    <Form.Control required type="text" placeholder="Enter username" onChange={this.handleChangeUsername}/>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter username" />
-                    <Button type="submit" onClick={this.handleClickLogIn}>Login</Button> 
-                    <Button type="submit" onClick={this.handleClickCreate}>Create Account</Button> 
+                    <Form.Control required type="password" placeholder="Enter password" onChange={this.handleChangePassword}/>
+                    <div>
+                    <Button type="submit" className="button" onClick={this.handleClickLogIn}>Login</Button> 
+                    <Button type="submit" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
+                    </div>
                 </Form>
             </div>    
         )

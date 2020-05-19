@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import '../Modal.css'
 
 
 
@@ -17,18 +18,22 @@ handleNameChange = (e) => {
     let habit_name = e.target.value;
     this.setState({ habit_name: habit_name })
 }
+
 handleTargetChange = (e) => {
     let target_value = e.target.value;
     this.setState({ target_value: target_value })
 }
+
 handleDateChange = (e) => {
     let start_date = e.target.value;
     this.setState({ start_date: start_date })
 }
+
 handleFrequencyChange = (e) => {
     let frequency = e.target.value;
     this.setState({ frequency: frequency })
 }
+
 handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,7 +55,7 @@ handleSubmit = async (e) => {
             streak: 0,
             completed: false
             })
-    })
+        })
     this.props.onHide();
 }
 

@@ -22,24 +22,11 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.userID)
-    return (
-      <div className="App">
-        <h1>Habit Checker</h1>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/LogIn" render={(props) => 
-              (<LogIn
-                userID={this.userID}
-                setID={this.setID}/>
-              )}
-            />
-            <Route path ="/habits" component={Habits}/>
-            <Route path ="/dashboard" render={(props) => <Dashboard {...props} isAuthed={true} />} />
-            <Redirect from="/" to="/LogIn"/>
-          </Switch>
-        </BrowserRouter>
-      </div>
-    );
+
+
+    return this.state.userID !== null ? <Dashboard setID = {this.setID} userID = {this.state.userID}/> : <LogIn setID = {this.setID} />
+
+    
   }
 }
 

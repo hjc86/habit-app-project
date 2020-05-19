@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import '../Modal.css'
+import '../css/Modal.css'
 
 
 
@@ -45,7 +45,7 @@ handleSubmit = async (e) => {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            user_id: 14,
+            user_id: this.props.user_id,
             habit_name: this.state.habit_name,
             current_value: 0,
             target_value: this.state.target_value,
@@ -57,6 +57,7 @@ handleSubmit = async (e) => {
             })
         })
     this.props.onHide();
+    this.props.updateState();
 }
 
 

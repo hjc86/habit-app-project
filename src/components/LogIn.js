@@ -3,7 +3,7 @@ import {Router, Redirect } from "react-router-dom";
 import Habits from "./Habits"; 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import '../LogIn.css'
+import '../css/LogIn.css'
 
 class LogIn extends React.Component {
     constructor(props) {

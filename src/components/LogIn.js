@@ -1,6 +1,8 @@
 import React from "react";
 import {Router, Redirect } from "react-router-dom";
 import Habits from "./Habits"; 
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button"
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -59,14 +61,14 @@ class LogIn extends React.Component {
     render(){
         return (
             <div>
-                <form autocomplete = 'off'>
-                    <label>Username</label>
-                    <input onChange={this.handleChangeUsername} type="text" id="username" name="username" required/> 
-                    <label>Password</label>
-                    <input onChange={this.handleChangePassword} type="text" id="password" name="password" required /> 
-                    <button type="submit" onClick={this.handleClickLogIn}>Login</button> 
-                    <button type="submit" onClick={this.handleClickCreate}>Create Account</button> 
-                </form>
+                <Form>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" placeholder="Enter username" />
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Enter username" />
+                    <Button type="submit" onClick={this.handleClickLogIn}>Login</Button> 
+                    <Button type="submit" onClick={this.handleClickCreate}>Create Account</Button> 
+                </Form>
             </div>    
         )
     }

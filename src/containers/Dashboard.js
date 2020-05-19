@@ -7,7 +7,8 @@ import Button from 'react-bootstrap/Button'
 class Modals extends React.Component {
   constructor(props){
     super(props);
-    this.state = {modalShow : false, setModalshow : false
+    this.state = {
+      modalShow : false, 
     }
   }
 
@@ -20,12 +21,12 @@ class Modals extends React.Component {
       return (
           
         <>
-          <Button variant="primary" onClick={() => this.setState({ setModalShow: true })}> Create new habit!</Button>
+          <Button variant="primary" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
           <Button onClick={this.handleClickLogout}>Logout</Button>
     
           <MyVerticallyCenteredModal
             show={this.state.modalShow}
-            onHide={() => this.setState( {setModalShow : false} )}
+            onHide={() => this.setState({modalShow : false})}
             user_id = {this.props.userID}
           />
         </>

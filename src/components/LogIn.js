@@ -59,7 +59,7 @@ class LogIn extends React.Component {
     render(){
         return (
             <div>
-                <form>
+                <form autocomplete = 'off'>
                     <label>Username</label>
                     <input onChange={this.handleChangeUsername} type="text" id="username" name="username" required/> 
                     <label>Password</label>

@@ -18,7 +18,7 @@ class Habits extends React.Component {
     }
 
     componentDidMount() {
-        
+        // displayHabits();
     }
 
     render () {

@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
+import LogIn from "./components/LogIn";
+import Habits from "./components/Habits";
+import Dashboard from './containers/Dashboard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      userID: null
+    }
+  }
+
+  setID = (loginID) => {
+    this.setState({
+      userID: loginID
+    })
+  }
+
+  render() {
+    
+    return this.state.userID !== null ? <Dashboard setID = {this.setID} userID = {this.state.userID}/> : <LogIn setID = {this.setID} />
+
+    
+  }
 }
 
 export default App;

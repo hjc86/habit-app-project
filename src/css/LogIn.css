@@ -1,0 +1,29 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin: 10px;
+    align-items:center;
+    
+    
+    
+    
+    
+}
+
+.formDiv {
+    display: flex;
+    width: 32vw;
+    border: 10px;   
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.30);
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    padding: 20px;
+}
+
+
+.button{
+    margin: 1em;
+}

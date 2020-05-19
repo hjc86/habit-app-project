@@ -1,3 +1,3 @@
-nav{
-    background-color:green;
+.habits-container {
+    display: flex;
 }

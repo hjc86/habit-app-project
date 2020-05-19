@@ -1,6 +1,4 @@
 import React from "react";
-import {Router, Redirect } from "react-router-dom";
-import Habits from "./Habits"; 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import '../css/LogIn.css'
@@ -13,7 +11,6 @@ class LogIn extends React.Component {
             password: null,
             userID: null
         }
-        
     }
     
     handleChangeUsername = (e) => {
@@ -24,7 +21,7 @@ class LogIn extends React.Component {
         let password = e.target.value;
         this.setState({ password: password })
     }
-e
+
     handleClickCreate = async (event) => {
         event.preventDefault();
         console.log(event.target);
@@ -48,6 +45,8 @@ e
         .then(response => response.json())
         .then(data => {
             if (typeof data === 'number') {
+                // sessionStorage.setItem('userID', data); ///////////////////////////////Session stuff
+                // console.log("Session storage login", sessionStorage.getItem('data')); //////////////////////////////////////////////////
                 this.setState({userID: data});
                 this.props.setID(this.state.userID);
             } else{ 
@@ -55,8 +54,6 @@ e
             }
         });
         
-        //this.props.setID(newID)
-        //from app.js
     }
 
     render(){

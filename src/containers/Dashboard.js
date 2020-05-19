@@ -16,7 +16,6 @@ class Dashboard extends React.Component {
       modalShow : false,
       accountModalShow : false,
       data: null,
-      count: 0
     }
   }
 
@@ -25,18 +24,13 @@ class Dashboard extends React.Component {
   }
 
   handleClickLogout = () =>{
+    localStorage.setItem('data', null);
+    console.log("local storage", localStorage.getItem('data'));
     this.props.setID(null);
   }
 
   handleClickAccount = async (event) =>{
     event.preventDefault();
-    //     console.log(event.target);
-    //     const url = 'http://localhost:3001/users';
-    //     const response = await fetch(url, {
-    //         method: 'put',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify({id: this.props.userID, username: this.state.username, password: this.state.password})
-    //     })
 
     this.setState({
       accountModalShow : true
@@ -59,7 +53,6 @@ class Dashboard extends React.Component {
     // const [modalShow, setModalShow] = React.useState(false);
 
     render(){
-      console.log(this.state.count);
       return this.state.data == null ? 'Loading...' : (
           
         <div>
@@ -68,9 +61,9 @@ class Dashboard extends React.Component {
             HabitCheck
           </Navbar.Brand>
             <Nav>
-            <Button variant="outline-dark" onClick={this.handleClickAccount}>Account</Button>
+            <Button variant="dark" onClick={this.handleClickAccount}>Account</Button>
             {'    '}
-            <Button variant="outline-dark" onClick={this.handleClickLogout}>Logout</Button>
+            <Button variant="dark" onClick={this.handleClickLogout}>Logout</Button>
             </Nav>
           </Navbar>
           

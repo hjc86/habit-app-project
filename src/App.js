@@ -21,9 +21,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.userID)
-
-
+    
     return this.state.userID !== null ? <Dashboard setID = {this.setID} userID = {this.state.userID}/> : <LogIn setID = {this.setID} />
 
     

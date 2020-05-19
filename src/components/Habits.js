@@ -39,14 +39,25 @@ class Habits extends React.Component {
         event.preventDefault();
         console.log(event.target);
         let completed;
+        let currentStreak = this.props.data.streak;
+        console.log(currentStreak);
+        console.log(this.props.data);
+        let time = new Date().getTime() / 1000;
+        console.log(time);
+        console.log(this.props.data.start_date);
+        (time > this.props.data.start_date && time < this.props.data.end_date) ? currentStreak++ : currentStreak = currentStreak;
         this.props.data.completed ? completed = 0 : completed = 1;
         const url = 'http://localhost:3001/habits';
         const response = await fetch(url, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id: this.props.data.id, completed: completed})
+            body: JSON.stringify({id: this.props.data.id, completed: completed, streak: currentStreak})
         })        
         this.props.updateState();
+
+
+
+
 
     }
 

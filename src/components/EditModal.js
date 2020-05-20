@@ -74,7 +74,6 @@ handleSubmit = (e) => {
                 this.props.updateState();
             }
             else if(data.errorMessage){
-                console.log(data.errorMessage);
                 this.setState({message: data.errorMessage, alertShow: true})
             }
             else{

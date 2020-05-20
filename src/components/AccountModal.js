@@ -3,13 +3,17 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import '../css/Modal.css'
+import '../css/Modal.css';
+import AlertMessage from './Alert';
 
 class AccountModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           data: null,
+          // message: null,
+          // variant: null,
+          // alertShow: false
         }
     }
 
@@ -31,11 +35,12 @@ handleSubmit = async (e) => {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            id: this.props.user_id,
-            username: this.state.username,
-            password: this.state.password
+              id: this.props.user_id,
+              username: this.state.username,
+              password: this.state.password
             })
         })
+    // this.setState({message: response.errorMessage, alertShow: true})
     this.props.onHide();
     this.props.updateAccState();
 }
@@ -52,8 +57,9 @@ handleClickDelete = async (event) =>{
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({id: this.props.user_id})
           })
+          // this.props.updateAccState();       
           this.props.setID(null);
-          this.props.updateAccState();       
+
         }
     }  
 }
@@ -75,7 +81,6 @@ componentDidMount() {
 render(){
 
     console.log(this.state)
-
 
     return this.props.username == null ? 'Loading...' : (
       <Modal
@@ -114,6 +119,7 @@ render(){
           <Button variant= "primary" onClick={this.handleSubmit}>Save Changes</Button>
           <Button variant = "danger" onClick={this.handleClickDelete}>Delete</Button>
         </Modal.Footer>
+        {/* <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/> */}
       </Modal>
     );
   }

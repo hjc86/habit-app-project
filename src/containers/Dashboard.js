@@ -33,7 +33,11 @@ class Dashboard extends React.Component {
   handleClickAccount = async (event) =>{
     event.preventDefault();
     console.log("HANDLE CLICK ACCOUNT");
-    this.getAccountDetails();
+    
+    if(this.props.userID !== null){
+      console.log("Calling account details from handle click")
+      this.getAccountDetails();
+    }
     this.setState({
       accountModalShow : true
     })
@@ -52,14 +56,17 @@ class Dashboard extends React.Component {
     const response = await fetch(url);
     const data = await response.json();
     this.setState({accountData: data});
-}
+  }
 
   componentDidMount() {
     this.displayHabits();
     
   }
   componentWillMount(){
-    this.getAccountDetails();
+    console.log(this.props.userID)
+    if(this.props.userID !== null){
+      this.getAccountDetails();
+    }
   }
 
     // const [modalShow, setModalShow] = React.useState(false);

@@ -57,7 +57,7 @@ class Dashboard extends React.Component {
           
         <div>
           <Navbar id="navbar" bg="dark" variant="dark">
-          <Navbar.Brand href="/">
+          <Navbar.Brand>
             HabitCheck
           </Navbar.Brand>
             <Nav>

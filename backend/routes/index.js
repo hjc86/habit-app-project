@@ -6,21 +6,26 @@ const db = require("../db/queries.js");
 /////////////////////////////////USER ROUTES
 
 router.post('/users', function (req, res, next) {
+    const defaultError = {defaultError: 'There was an error creating an account.'};
+    const errorMessage = {errorMessage: 'Username already exists'};
+    const successMessage = {successMessage: 'User created!'};
     db.checkUserExists(req.body.username)
     .then(function(users){
         if(users[0].count > 0){
-            res.send('username already exists')
+            res.send(errorMessage)
         } else{
             db.addUser(req.body)
             .then(function(users){
-                res.send('User Created')
+                res.send(successMessage)
             })
             .catch(function(error) {
+                res.send(defaultError)
                 next(error);
             })
         }
     })
     .catch(function(error){
+        res.send(defaultError)
         next(error);
     });
 })

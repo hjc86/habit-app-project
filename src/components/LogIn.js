@@ -2,6 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import '../css/LogIn.css'
+import AlertMessage from './Alert'
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -9,7 +10,10 @@ class LogIn extends React.Component {
         this.state = {
             username: null,
             password: null,
-            userID: null
+            userID: null,
+            alertShow: false,
+            message: null,
+            variant: null
         }
     }
     
@@ -24,15 +28,41 @@ class LogIn extends React.Component {
 
     handleClickCreate = async (event) => {
         event.preventDefault();
-        console.log(event.target);
         const url = 'http://localhost:3001/users';
-        const response = await fetch(url, {
+        fetch(url, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username: this.state.username, password: this.state.password})
         })
+        .then(response => response.json())
+        .then(data =>{
+
+            if(data.errorMessage){
+                console.log(data.errorMessage);
+                this.setState({
+                    message: data.errorMessage,
+                    variant: "danger"
+                })
+                this.toggleAlertShow();
+            } else if(data.successMessage){
+                console.log(data.successMessage)
+                this.setState({
+                    message: data.successMessage,
+                    variant: "success"
+                })
+                this.toggleAlertShow();
+            } else if(data.defaultError){
+                console.log(data.defaultError)
+                this.toggleAlertShow();
+            } else {
+                console.log(data)
+            }
+        })
     }
 
+    toggleAlertShow = () =>{
+        this.setState({alertShow : true})
+    }
     
     handleClickLogIn = async (event) => {
         event.preventDefault();
@@ -45,18 +75,22 @@ class LogIn extends React.Component {
         .then(response => response.json())
         .then(data => {
             if (typeof data === 'number') {
-                // sessionStorage.setItem('userID', data); ///////////////////////////////Session stuff
-                // console.log("Session storage login", sessionStorage.getItem('data')); //////////////////////////////////////////////////
                 this.setState({userID: data});
                 this.props.setID(this.state.userID);
             } else{ 
                 console.log(data.message)
+                this.setState({
+                    message: data.message,
+                    variant: "danger"
+                })
+                this.toggleAlertShow();
             }
         });
         
     }
 
     render(){
+        console.log(this.state.alertShow);
         return (
             <div className="formDiv">
                 <Form className="form" >
@@ -68,7 +102,8 @@ class LogIn extends React.Component {
                     <Button type="submit" className="button" onClick={this.handleClickLogIn}>Login</Button> 
                     <Button type="submit" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
                     </div>
-                </Form>
+                </Form>  
+                <AlertMessage variant={this.state.variant} message={this.state.message} show={this.state.alertShow} toggleShow={this.toggleAlertShow}/>
             </div>    
         )
     }

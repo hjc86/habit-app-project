@@ -114,7 +114,7 @@ render(){
         <Modal.Footer>
           <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
           <Button variant= "primary" onClick={this.handleSubmit}>Submit</Button>
-          <Button onClick={this.handleClickDelete}>Delete</Button>
+          {/* <Button onClick={this.handleClickDelete}>Delete</Button> */}
         </Modal.Footer>
       </Modal>
     );

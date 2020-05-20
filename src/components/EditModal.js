@@ -47,14 +47,12 @@ handleClickDelete = async (event) =>{
         body: JSON.stringify({id: this.props.data.id})
     })
     this.props.updateState();
+    this.props.onHide();
 }
 
 handleSubmit = (e) => {
     this.setState({alertShow: false});
     e.preventDefault();
-
-    // let start_date = new Date(this.state.start_date).getTime() / 1000;
-    // let end_date = this.state.frequency * 86400 + start_date;
 
     const url = 'http://localhost:3001/habits';
     fetch(url, {
@@ -94,7 +92,7 @@ render(){
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Update habit
+            Edit Habit details
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

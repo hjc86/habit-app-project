@@ -6,8 +6,6 @@ import Row from 'react-bootstrap/Row';
 import AlertMessage from './Alert';
 import '../css/Modal.css'
 
-
-
 class HabitModal extends React.Component {
     constructor(props) {
         super(props);
@@ -73,7 +71,9 @@ handleSubmit = async (e) => {
 }
 
 render(){
-    console.log(this.state)
+    let todaysDate = new Date()
+    let formattedTodaysDate = todaysDate.getDate() + "/" + (todaysDate.getMonth() + 1) + "/" + todaysDate.getFullYear()
+   
     return (
       <Modal
         {...this.props}
@@ -104,7 +104,7 @@ render(){
                     <Form.Label>
                         Start Date
                     </Form.Label>
-                    <Form.Control type="date" placeholder="Enter start date" />
+                    <Form.Control type="date" defaultValue={formattedTodaysDate}/>
                 </Form.Group>     
                 <Form.Group as={Row} onChange={this.handleFrequencyChange}>
                     <Form.Label>

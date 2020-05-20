@@ -20,7 +20,10 @@ class App extends React.Component {
 
   render() {
     
-    return this.state.userID !== null ? <div className="App"><Dashboard setID = {this.setID} userID = {this.state.userID}/></div> : <div className="App"><LogIn setID = {this.setID} /></div>
+    return this.state.userID !== null ? 
+    <div className="App"><Dashboard setID = {this.setID} userID = {this.state.userID}/></div> 
+    : 
+    <div className="App"><LogIn setID = {this.setID} /></div>
 
     
   }

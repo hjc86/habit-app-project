@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import '../css/Modal.css';
 
-class UpdateModal extends React.Component {
+class EditModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -108,4 +108,4 @@ render(){
   
   
 
-export default UpdateModal;
+export default EditModal;

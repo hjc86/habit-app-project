@@ -1,6 +1,6 @@
 import React from "react";
 import Button from 'react-bootstrap/Button'
-import UpdateModal from './UpdateModal'
+import EditModal from './EditModal'
 
 class Habits extends React.Component {
     constructor(props) {
@@ -74,7 +74,7 @@ class Habits extends React.Component {
                 <Button onClick={this.handleClickComplete}>Complete</Button>
                 <Button onClick={() => this.setState({ modalShow: true })}> Update!</Button>
 
-                <UpdateModal
+                <EditModal
                 show={this.state.modalShow}
                 onHide={() => this.setState({modalShow : false})}
                 user_id = {this.props.userID}

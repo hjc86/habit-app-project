@@ -18,6 +18,7 @@ class UpdateModal extends React.Component {
     }
 
 handleCurrentChange = (e) => {
+    e.preventDefault();
     let unitDone = parseInt(e.target.value);
     this.setState({unitDone: unitDone});
 }

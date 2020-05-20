@@ -91,19 +91,22 @@ class LogIn extends React.Component {
 
     render(){
         return (
-            <div className="formDiv">
-                <Form className="form" >
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control required type="text" placeholder="Enter username" onChange={this.handleChangeUsername}/>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control required type="password" placeholder="Enter password" onChange={this.handleChangePassword}/>
-                    <div>
-                    <Button type="submit" className="button" onClick={this.handleClickLogIn}>Login</Button> 
-                    <Button type="submit" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
-                    </div>
-                </Form>  
-                <AlertMessage variant={this.state.variant} message={this.state.message} show={this.state.alertShow} toggleShow={this.toggleAlertShow}/>
-            </div>    
+            <div className="login-container">
+                <h1 className="title">HabitChecker</h1>
+                    <div className="formDiv">
+                        <Form className="form" >
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control required className="input" type="text" placeholder="Enter username" onChange={this.handleChangeUsername}/>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control required  className="input" type="password" placeholder="Enter password" onChange={this.handleChangePassword}/>
+                            <div>
+                            <Button type="submit" className="button" onClick={this.handleClickLogIn}>Login</Button> 
+                            <Button type="submit" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
+                            </div>
+                        </Form>  
+                        <AlertMessage className="alert-container" variant={this.state.variant} message={this.state.message} show={this.state.alertShow} toggleShow={this.toggleAlertShow}/>
+                    </div> 
+            </div>   
         )
     }
  }

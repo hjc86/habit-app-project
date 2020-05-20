@@ -12,7 +12,7 @@ router.post('/users', function (req, res, next) {
 
     if(req.body.username == null || req.body.password == null || req.body.username == '' || req.body.password == ''){
         res.send({errorMessage: 'Please enter a valid username and password'})
-    }
+    } else {
 
     db.checkUserExists(req.body.username)
     .then(function(users){
@@ -33,6 +33,7 @@ router.post('/users', function (req, res, next) {
         res.send(defaultError)
         next(error);
     });
+    }
 })
 
 router.get('/users', function (req, res, next){
@@ -50,7 +51,7 @@ router.post('/login', function(req, res, next) {
     const errorMessage = {errorMessage: 'Username or password is incorrect.'};
 
     if(req.body.username == null || req.body.password == null || req.body.username == '' || req.body.password == ''){
-        res.send({errorMessage: 'Please enter a valid username or password'})
+        res.send({errorMessage: 'Please enter a valid username and password'})
     } else {
     db.checkUserExists(req.body.username)
     .then(async function(users){
@@ -111,18 +112,15 @@ router.put('/users', function(req, res, next){
     let defaultError = {defaultError: 'There was a server error with that.'}
     let currentUsername;
     let currentPassword;
+
     if(req.body.password == '' && req.body.password == ''){
         res.send({errorMessage: 'Enter a username and password'})
-    }
-    if(req.body.username == ''){
+    } else if(req.body.username == ''){
         res.send({errorMessage: 'Enter a username'})
-    }
-    if(req.body.password == ''){
+    } else if(req.body.password == ''){
         res.send({errorMessage: 'Enter a password'})
     }
     
-
-
     db.getSingleUser(id)
     .then(function(users){
         console.log('USERS GROM SINGLE USER', users);

@@ -20,8 +20,8 @@ class Dashboard extends React.Component {
     }
   }
 
-  updateState = () => {
-    this.displayHabits();
+  updateState = async () =>  {
+    await this.displayHabits();
   }
 
   handleClickLogout = () =>{
@@ -84,10 +84,13 @@ class Dashboard extends React.Component {
             <Button variant="dark" onClick={this.handleClickAccount}>Account</Button>
             {'    '}
             <Button variant="dark" onClick={this.handleClickLogout}>Logout</Button>
+            {'    '}
+            <Button variant="primary" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
             </Nav>
           </Navbar>
           
-          <Button variant="primary" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
+          
+          
     
           <HabitModal
             show={this.state.modalShow}

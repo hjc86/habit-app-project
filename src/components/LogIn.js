@@ -78,9 +78,9 @@ class LogIn extends React.Component {
                 this.setState({userID: data});
                 this.props.setID(this.state.userID);
             } else{ 
-                console.log(data.message)
+                console.log(data.errorMessage)
                 this.setState({
-                    message: data.message,
+                    message: data.errorMessage,
                     variant: "danger"
                 })
                 this.toggleAlertShow();

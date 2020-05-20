@@ -9,6 +9,13 @@ router.post('/users', function (req, res, next) {
     const defaultError = {defaultError: 'There was an error creating an account.'};
     const errorMessage = {errorMessage: 'Username already exists'};
     const successMessage = {successMessage: 'User created!'};
+
+    if(req.body.username == null || req.body.password == null || req.body.username == '' || req.body.password == ''){
+        res.send({errorMessage: 'Please enter a valid username and password'})
+    }
+
+
+    
     db.checkUserExists(req.body.username)
     .then(function(users){
         if(users[0].count > 0){
@@ -43,6 +50,11 @@ router.get('/users', function (req, res, next){
 router.post('/login', async function(req, res, next) {
     console.log(req.body);
     const errorMessage = {message: 'Username or password is incorrect.'};
+
+    if(req.body.username == null || req.body.password == null || req.body.username == '' || req.body.password == ''){
+        res.send({errorMessage: 'Please enter a valid username or password'})
+    }
+
     db.checkUserExists(req.body.username)
     .then(async function(users){
         if(!(users[0].count > 0)){
@@ -54,7 +66,6 @@ router.post('/login', async function(req, res, next) {
         }
     })
     .catch(function(error){
-        res.send(errorMessage); ///
         next(error);
     });
   
@@ -97,6 +108,18 @@ router.put('/users', function(req, res, next){
     let defaultError = {defaultError: 'There was a server error with that.'}
     let currentUsername;
     let currentPassword;
+    if(req.body.password == '' && req.body.password == ''){
+        res.send({errorMessage: 'Enter a username and password'})
+    }
+    if(req.body.username == ''){
+        res.send({errorMessage: 'Enter a username'})
+    }
+    if(req.body.password == ''){
+        res.send({errorMessage: 'Enter a password'})
+    }
+    
+
+
     db.getSingleUser(id)
     .then(function(users){
         console.log('USERS GROM SINGLE USER', users);

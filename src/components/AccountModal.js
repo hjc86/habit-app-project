@@ -14,7 +14,8 @@ class AccountModal extends React.Component {
           message: null,
           variant: null,
           alertShow: false,
-          username: this.props.username
+          username: this.props.username,
+          password: this.props.password
         }
     }
 

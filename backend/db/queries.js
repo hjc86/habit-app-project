@@ -39,6 +39,7 @@ function deleteUser(user_id){
 }
 
 function updateUser(user_id, updatedInfo){
+    console.log(updatedInfo);
     return users().where('id', parseInt(user_id)).update(updatedInfo);
 }
 

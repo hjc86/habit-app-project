@@ -92,24 +92,37 @@ router.put('/users', function(req, res, next){
     let id = req.body.id;
     console.log(id);
     console.log(req.body.username);
+    let errorMessage = {errorMessage: 'That username is taken.'};
+    let successMessage = {successMessage: `Username updated to: ${req.body.username}`}
+    let defaultError = {defaultError: 'There was a server error with that.'}
+    let currentUsername;
+    let currentPassword;
+    db.getSingleUser(id)
+    .then(function(users){
+        console.log('USERS GROM SINGLE USER', users);
+        currentUsername = users.username;
+        currentPassword = users.password;
+    }).then(
+
     db.checkUserExists(req.body.username)
     .then(function(users){
         console.log(users);
-        if(users[0].count == 0){
+        if(users[0].count == 0 || req.body.username == currentUsername){
             db.updateUser(id, req.body)
             .then(function(users){
-                res.send(`User updated with id: ${id}`)            
+                res.send(successMessage)            
             })
             .catch(function(error) {
                 next(error);
             })        
         } else{
-            res.send("An account with that user ID does not exist.")
+            res.send(errorMessage)
         }
     })
     .catch(function(error){
         next(error);
-    });
+    })
+    )
 })
 
 /////////////////////////////////HABIT ROUTES

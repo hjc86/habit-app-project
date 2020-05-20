@@ -11,9 +11,10 @@ class AccountModal extends React.Component {
         super(props);
         this.state = {
           data: null,
-          // message: null,
-          // variant: null,
-          // alertShow: false
+          message: null,
+          variant: null,
+          alertShow: false,
+          username: this.props.username
         }
     }
 
@@ -31,7 +32,7 @@ handleSubmit = async (e) => {
     e.preventDefault();
 
     const url = 'http://localhost:3001/users';
-    const response = await fetch(url, {
+    fetch(url, {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -40,9 +41,23 @@ handleSubmit = async (e) => {
               password: this.state.password
             })
         })
+        .then(response => response.json())
+        .then(data =>{
+          if(data.successMessage){
+              this.setState({alertShow: false})
+              this.props.onHide();
+              this.props.updateAccState();
+
+          }
+          else if(data.errorMessage){
+            this.setState({message: data.errorMessage, alertShow: true})
+          } else{
+            console.log(data);
+          }
+          
+        })
     // this.setState({message: response.errorMessage, alertShow: true})
-    this.props.onHide();
-    this.props.updateAccState();
+    
 }
 
 handleClickDelete = async (event) =>{
@@ -119,7 +134,7 @@ render(){
           <Button variant= "primary" onClick={this.handleSubmit}>Save Changes</Button>
           <Button variant = "danger" onClick={this.handleClickDelete}>Delete</Button>
         </Modal.Footer>
-        {/* <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/> */}
+        <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
       </Modal>
     );
   }

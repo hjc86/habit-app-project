@@ -16,6 +16,7 @@ class Dashboard extends React.Component {
       modalShow : false,
       accountModalShow : false,
       data: null,
+      accountData: null
     }
   }
 
@@ -31,7 +32,8 @@ class Dashboard extends React.Component {
 
   handleClickAccount = async (event) =>{
     event.preventDefault();
-
+    console.log("HANDLE CLICK ACCOUNT");
+    this.getAccountDetails();
     this.setState({
       accountModalShow : true
     })
@@ -45,14 +47,25 @@ class Dashboard extends React.Component {
     this.setState({data: data});
   }
 
+  getAccountDetails = async () =>{
+    const url = `http://localhost:3001/users/${this.props.userID}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({accountData: data});
+}
+
   componentDidMount() {
     this.displayHabits();
+    
   }
-
+  componentWillMount(){
+    this.getAccountDetails();
+  }
 
     // const [modalShow, setModalShow] = React.useState(false);
 
     render(){
+      console.log(this.state.accountData);
       return this.state.data == null ? 'Loading...' : (
           
         <div>
@@ -80,8 +93,10 @@ class Dashboard extends React.Component {
             show={this.state.accountModalShow}
             onHide={() => this.setState({accountModalShow : false})}
             user_id = {this.props.userID}
-            updateState = {this.updateState}
+            updateAccState = {this.getAccountDetails}
             setID = {this.props.setID}
+            username = {this.state.accountData.username}
+            password = {this.state.accountData.password}
           />
 
           <div className="habits-container">

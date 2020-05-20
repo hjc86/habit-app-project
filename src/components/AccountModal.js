@@ -37,7 +37,7 @@ handleSubmit = async (e) => {
             })
         })
     this.props.onHide();
-    this.props.updateState();
+    this.props.updateAccState();
 }
 
 handleClickDelete = async (event) =>{
@@ -53,28 +53,31 @@ handleClickDelete = async (event) =>{
               body: JSON.stringify({id: this.props.user_id})
           })
           this.props.setID(null);
-          this.props.updateState();       
+          this.props.updateAccState();       
         }
     }  
 }
 
-getAccountDetails = async () =>{
-    const url = `http://localhost:3001/users/${this.props.user_id}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({data: data});
-    console.log(data);
-}
+// getAccountDetails = async () =>{
+//     const url = `http://localhost:3001/users/${this.props.user_id}`;
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     this.setState({data: data});
+//     console.log(data);
+// }
 
 componentDidMount() {
-    this.getAccountDetails();
-  }
+    console.log('componentDidMount fired');
+    // this.getAccountDetails();
+}
+
 
 render(){
+
     console.log(this.state)
 
 
-    return this.state.data == null ? 'Loading...' : (
+    return this.props.username == null ? 'Loading...' : (
       <Modal
         {...this.props}
         size="lg"
@@ -93,14 +96,16 @@ render(){
                         Username
                     </Form.Label>
                     {/* <Form.Control type="text" /> */}
-                    <Form.Control type="text" defaultValue={this.state.data.username} />
+                    {/* <Form.Control type="text" defaultValue={this.state.data.username} /> */}
+                    <Form.Control type="text" defaultValue={this.props.username} />
                 </Form.Group>  
                 <Form.Group as={Row} onChange={this.handlePasswordChange}>
                     <Form.Label>
                         Password
                     </Form.Label>
                     {/* <Form.Control type="text" placeholder={"password"} /> */}
-                    <Form.Control type="text" defaultValue={this.state.data.password} />
+                    {/* <Form.Control type="text" defaultValue={this.state.data.password} /> */}
+                    <Form.Control type="text" defaultValue={this.props.password} />
                 </Form.Group>         
             </Form>
         </Modal.Body>

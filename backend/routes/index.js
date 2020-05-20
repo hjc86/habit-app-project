@@ -54,6 +54,7 @@ router.post('/login', async function(req, res, next) {
         }
     })
     .catch(function(error){
+        res.send(errorMessage); ///
         next(error);
     });
   
@@ -91,10 +92,10 @@ router.put('/users', function(req, res, next){
     let id = req.body.id;
     console.log(id);
     console.log(req.body.username);
-    db.checkIdExists(id)
+    db.checkUserExists(req.body.username)
     .then(function(users){
         console.log(users);
-        if(users[0].count > 0){
+        if(users[0].count == 0){
             db.updateUser(id, req.body)
             .then(function(users){
                 res.send(`User updated with id: ${id}`)            

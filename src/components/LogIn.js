@@ -90,7 +90,6 @@ class LogIn extends React.Component {
     }
 
     render(){
-        console.log(this.state.alertShow);
         return (
             <div className="formDiv">
                 <Form className="form" >

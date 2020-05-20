@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import AlertMessage from './Alert';
 import '../css/Modal.css'
 
 
@@ -11,6 +12,8 @@ class HabitModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            message: null,
+            alertShow: false
         }
     }
 
@@ -41,7 +44,7 @@ handleSubmit = async (e) => {
     let end_date = this.state.frequency * 86400 + start_date;
 
     const url = 'http://localhost:3001/habits';
-    const response = await fetch(url, {
+    fetch(url, {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -56,8 +59,17 @@ handleSubmit = async (e) => {
             completed: false
             })
         })
-    this.props.onHide();
-    this.props.updateState();
+        .then(response => response.json())
+        .then(data =>{
+            if(data.successMessage){
+                this.props.onHide();
+                this.props.updateState();
+            } else if(data.errorMessage){
+                this.setState({message: data.errorMessage, alertShow: true})
+            } else {
+                console.log(data);
+            }
+        })
 }
 
 render(){
@@ -101,13 +113,15 @@ render(){
                     <Form.Control type="number" placeholder="Enter frequency" />
                 </Form.Group>          
 
-
             </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
           <Button variant= "primary" onClick={this.handleSubmit}>Submit</Button>
         </Modal.Footer>
+        
+        <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
+        
       </Modal>
     );
   }

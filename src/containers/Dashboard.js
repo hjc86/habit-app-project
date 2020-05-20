@@ -68,7 +68,6 @@ class Dashboard extends React.Component {
           </Navbar>
           
           <Button variant="primary" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
-          
     
           <HabitModal
             show={this.state.modalShow}

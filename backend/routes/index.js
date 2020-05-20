@@ -168,12 +168,17 @@ router.put('/habits', function(req, res, next){ /////// Trying to copy username/
 
 ///////////////////////ADDING NEW HABIT
 router.post('/habits', function (req, res, next) { //No duplicate habit check needed?
-   
+    const errorMessage = {errorMessage: 'Please fill out all information'};
+    const successMessage = {successMessage: 'Habit created successfully'};
+    const defaultMessage = {message: 'Server error'};
+
     db.addHabit(req.body)
     .then(function(users){
-        res.send('Habit Created')            
+        res.send(successMessage)    
+
     })
     .catch(function(error) {
+        res.send(errorMessage)
         next(error);
     })
 

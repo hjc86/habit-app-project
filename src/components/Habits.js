@@ -11,31 +11,31 @@ class Habits extends React.Component {
         }
     }
 
-    handleClickDelete = async (event) =>{
+    handleClickDelete = (event) =>{
         event.preventDefault();
         const url = 'http://localhost:3001/habits';
-        const response = await fetch(url, {
+        fetch(url, {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id: this.props.data.id})
         })
-        this.props.updateState();
+        .then( this.props.updateState())
     }
     
-    handleClickUpdate = async (event) =>{
+    handleClickUpdate = (event) =>{
         event.preventDefault();
         console.log(event.target);
         const url = 'http://localhost:3001/habits';
-        const response = await fetch(url, {
+        fetch(url, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id: this.props.data.id})
         })        
-        this.props.updateState();
+        .then(this.props.updateState())
 
     }
 
-    handleClickComplete = async (event) =>{
+    handleClickComplete = (event) =>{
         event.preventDefault();
         console.log(event.target);
         let completed;
@@ -45,15 +45,15 @@ class Habits extends React.Component {
         let time = new Date().getTime() / 1000;
         console.log(time);
         console.log(this.props.data.start_date);
-        (time > this.props.data.start_date && time < this.props.data.end_date) ? currentStreak++ : currentStreak = currentStreak;
+        (time > this.props.data.start_date && time < this.props.data.end_date) ? currentStreak++ : currentStreak += 0;
         this.props.data.completed ? completed = 0 : completed = 1;
         const url = 'http://localhost:3001/habits';
-        const response = await fetch(url, {
+        fetch(url, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id: this.props.data.id, completed: completed, streak: currentStreak})
         })        
-        this.props.updateState();
+        .then(this.props.updateState());
 
 
 

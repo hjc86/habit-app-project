@@ -14,8 +14,6 @@ router.post('/users', function (req, res, next) {
         res.send({errorMessage: 'Please enter a valid username and password'})
     }
 
-
-    
     db.checkUserExists(req.body.username)
     .then(function(users){
         if(users[0].count > 0){
@@ -47,27 +45,32 @@ router.get('/users', function (req, res, next){
     });
 })
 
-router.post('/login', async function(req, res, next) {
+router.post('/login', function(req, res, next) {
     console.log(req.body);
-    const errorMessage = {message: 'Username or password is incorrect.'};
+    const errorMessage = {errorMessage: 'Username or password is incorrect.'};
 
     if(req.body.username == null || req.body.password == null || req.body.username == '' || req.body.password == ''){
         res.send({errorMessage: 'Please enter a valid username or password'})
-    }
-
+    } else {
     db.checkUserExists(req.body.username)
     .then(async function(users){
         if(!(users[0].count > 0)){
-            res.send('Username or password is incorrect.')
+            console.log("username does not exist");
+            res.send(errorMessage)
         } else {
-            let response = await db.checkUsernamePassword(req.body)
-            console.log('user ID in index response', response);
-            response === false ? res.send(errorMessage) : res.send(response)
+            db.checkUsernamePassword(req.body)
+            .then(function(response){
+                console.log('response in index', response);
+                response.password === req.body.password && response.username === req.body.username ? res.send(`${response.id}`) : res.send(errorMessage);
+                console.log('user ID in index response', response);
+            })
         }
     })
     .catch(function(error){
+        
         next(error);
     });
+    }
   
 })
 
@@ -184,14 +187,20 @@ router.put('/habits', function(req, res, next){ /////// Trying to copy username/
     let id = req.body.id;
     let body = req.body;
 
+    let errorMessage = {errorMessage: 'Please fill out all information.'};
+    let successMessage = {successMessage: 'Habit updated successfully'};
+    let defaultError = {defaultError: 'There was a server error with that.'};
+
     db.checkHabitIdExists(id)
     .then(function(habits){
         if(habits[0].count > 0){
             db.updateHabit(id, body)
             .then(function(habits){
-                res.send(`Habit updated with id: ${id}`)
+                // res.send(`Habit updated with id: ${id}`)
+                res.send(successMessage);
             })
             .catch(function(error){
+                res.send(errorMessage);
                 next(error);
             }) 
         } else{

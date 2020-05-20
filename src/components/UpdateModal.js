@@ -3,9 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import '../css/Modal.css'
-
-
+import '../css/Modal.css';
 
 class UpdateModal extends React.Component {
     constructor(props) {
@@ -37,14 +35,14 @@ handleFrequencyChange = (e) => {
     this.setState({ frequency: frequency })
 }
 
-handleSubmit = async (e) => {
+handleSubmit = (e) => {
     e.preventDefault();
 
     // let start_date = new Date(this.state.start_date).getTime() / 1000;
     // let end_date = this.state.frequency * 86400 + start_date;
 
     const url = 'http://localhost:3001/habits';
-    const response = await fetch(url, {
+    fetch(url, {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -53,12 +51,9 @@ handleSubmit = async (e) => {
             target_value: this.state.target_value
             })
         })
-    this.props.onHide();
-    this.props.updateState();
+    .then(this.props.onHide())
+    .then(this.props.updateState())
 }
-
-
-
 
 render(){
     console.log(this.state)

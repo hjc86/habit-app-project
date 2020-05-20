@@ -61,20 +61,20 @@ handleSubmit = async (e) => {
     
 }
 
-handleClickDelete = async (event) =>{
+handleClickDelete = (event) =>{
     let confirm1 = window.confirm("Are you sure you want to do this? This cannot be undone.");
     if(confirm1){
         let confirm2 = prompt("To delete your account, please enter 'danger zone' into the text box below.")
         if(confirm2==='danger zone'){
           event.preventDefault();
           const url = 'http://localhost:3001/users';
-          const response = await fetch(url, {
+          fetch(url, {
               method: 'delete',
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({id: this.props.user_id})
           })
           // this.props.updateAccState();       
-          this.props.setID(null);
+          .then(this.props.setID(null))
 
         }
     }  

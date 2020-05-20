@@ -26,12 +26,21 @@ function checkIdExists(id){
     return users().count('id as count').where('id', id);
 }
 
-async function checkUsernamePassword(user){
+// async function checkUsernamePassword(user){
+//     let username = user.username;
+//     let password = user.password;
+//     let response = await users().where('username', username).first();
+//     console.log('response in queries: ', response);
+//     return response.password === password ? `${response.id}` : false;
+// }
+
+function checkUsernamePassword(user){
+    console.log("Staring checkUsernamePassword");
     let username = user.username;
-    let password = user.password;
-    let response = await users().where('username', username).first();
-    console.log('response in queries: ', response);
-    return response.password === password ? `${response.id}` : false;
+
+    return users().where('username', username).first()
+    
+    
 }
 
 function deleteUser(user_id){

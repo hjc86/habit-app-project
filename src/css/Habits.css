@@ -1,4 +1,8 @@
-.habits-box {
+.habit-box {
+    background-color: white;
     display: flex; 
     flex-flow: row wrap;
+    border-radius: 5%;
+    text-align: center;
+    max-width: 20vw;
 }

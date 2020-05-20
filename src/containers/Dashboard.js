@@ -6,6 +6,7 @@ import Habits from '../components/Habits'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import '../css/Dashboard.css'
+import Row from 'react-bootstrap/Row'
 
 
 
@@ -84,10 +85,11 @@ class Dashboard extends React.Component {
             <Button variant="dark" onClick={this.handleClickAccount}>Account</Button>
             {'    '}
             <Button variant="dark" onClick={this.handleClickLogout}>Logout</Button>
+            {'    '}
+            <Button className="justify-content-right" variant="info" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
             </Nav>
           </Navbar>
           
-          <Button variant="primary" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
     
           <HabitModal
             show={this.state.modalShow}

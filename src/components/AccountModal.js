@@ -64,7 +64,7 @@ handleSubmit = async (e) => {
 handleClickDelete = (event) =>{
     let confirm1 = window.confirm("Are you sure you want to do this? This cannot be undone.");
     if(confirm1){
-        let confirm2 = prompt("To delete your account, please enter 'danger zone' into the text box below.")
+        let confirm2 = prompt("To delete your account, and all data associated with it, please enter 'danger zone' into the text box below.")
         if(confirm2==='danger zone'){
           event.preventDefault();
           const url = 'http://localhost:3001/users';
@@ -133,7 +133,7 @@ render(){
         <Modal.Footer>
           <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
           <Button variant= "primary" onClick={this.handleSubmit}>Save Changes</Button>
-          <Button variant = "danger" onClick={this.handleClickDelete}>Delete</Button>
+          <Button variant = "danger" onClick={this.handleClickDelete}>Delete Data</Button>
         </Modal.Footer>
         <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
       </Modal>

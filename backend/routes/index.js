@@ -189,6 +189,13 @@ router.put('/habits', function(req, res, next){ /////// Trying to copy username/
     let successMessage = {successMessage: 'Habit updated successfully'};
     let defaultError = {defaultError: 'There was a server error with that.'};
 
+    console.log(req.body.habit_name);
+    console.log(req.body.target_value);
+    if(req.body.habit_name == null || req.body.habit_name == "" || req.body.target_value == null || req.body.target_value == 0){
+        console.log("CHECK FAILED");
+        res.send(errorMessage);
+    } else {
+
     db.checkHabitIdExists(id)
     .then(function(habits){
         if(habits[0].count > 0){
@@ -208,6 +215,7 @@ router.put('/habits', function(req, res, next){ /////// Trying to copy username/
     .catch(function(error){
         next(error);
     });
+}
 })
 
 ///////////////////////ADDING NEW HABIT

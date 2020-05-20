@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import '../css/Modal.css';
+import AlertMessage from './Alert'
 
 class EditModal extends React.Component {
     constructor(props) {
@@ -11,7 +12,9 @@ class EditModal extends React.Component {
         this.state = {
             habit_name: this.props.data.habit_name,
             target_value: this.props.data.target_value,
-            frequency: this.props.data.frequency
+            frequency: this.props.data.frequency,
+            message: null,
+            alertShow: false
         }
     }
 
@@ -35,7 +38,19 @@ handleFrequencyChange = (e) => {
     this.setState({ frequency: frequency })
 }
 
+handleClickDelete = async (event) =>{
+    event.preventDefault();
+    const url = 'http://localhost:3001/habits';
+    const response = await fetch(url, {
+        method: 'delete',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id: this.props.data.id})
+    })
+    this.props.updateState();
+}
+
 handleSubmit = (e) => {
+    this.setState({alertShow: false});
     e.preventDefault();
 
     // let start_date = new Date(this.state.start_date).getTime() / 1000;
@@ -51,8 +66,21 @@ handleSubmit = (e) => {
             target_value: this.state.target_value
             })
         })
-    .then(this.props.onHide())
-    .then(this.props.updateState())
+        .then(response => response.json())
+        .then(data =>{
+            if(data.successMessage){
+                this.setState({alertShow: false});
+                this.props.onHide();
+                this.props.updateState();
+            }
+            else if(data.errorMessage){
+                console.log(data.errorMessage);
+                this.setState({message: data.errorMessage, alertShow: true})
+            }
+            else{
+                console.log(data);
+            }
+        })
 }
 
 render(){
@@ -98,7 +126,10 @@ render(){
         <Modal.Footer>
           <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
           <Button variant= "primary" onClick={this.handleSubmit}>Submit</Button>
+          <Button variant = "danger" onClick={this.handleClickDelete}>Delete</Button>
+
         </Modal.Footer>
+        <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
       </Modal>
     );
   }

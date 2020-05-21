@@ -9,27 +9,24 @@ module.exports = {
     },
 
     migrations: {
-      directory: './db/migrations',
+      directory: __dirname+'/migrations'
     },
     seeds: {
-      directory:'./db/seeds'
+      directory:'./seeds'
     }
   },
-
-
-
 
 test: {
   client: 'sqlite3',
   connection: {
-    filename: './db/habit_db_test.sqlite3'
+    filename: __dirname+ 'habit_db_test.sqlite3'
   },
 
   migrations: {
-    directory: './db/migrations',
+    directory:  __dirname+'/migrations'
   },
   seeds: {
-    directory:'./db/seeds'
+    directory:'./seeds/test'
   }
 
 }

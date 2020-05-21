@@ -61,20 +61,56 @@ describe('API Routes', function() {
       .get('/users')
       .end(function(err, res) {
       res.should.have.status(200);
-      
+      res.should.be.json; // jshint ignore:line
+      res.body.should.be.a('array');
+      res.body.length.should.equal(0);
+      // res.body[0].should.have.property('habit_name');
+      // res.body[0].name.should.equal('water');
+      // res.body[0].should.have.property('current_value');
+      // res.body[0].channel.should.equal(0);
+      // res.body[0].should.have.property('target_value');
+      // res.body[0].genre.should.equal(2000);
+      // res.body[0].should.have.property('frequency');
+      // res.body[0].rating.should.equal(3);
+      // res.body[0].should.have.property(start_date);
+      // res.body[0].explicit.should.equal(1589760000);
+      // res.body[0].should.have.property(end_date);
+      // res.body[0].explicit.should.equal(1589846399);
+      // res.body[0].should.have.property('streak');
+      // res.body[0].explicit.should.equal(0);
+      // res.body[0].should.have.property('completed');
+      // res.body[0].explicit.should.equal(false);
+          
+      done();
+      });
+    });
+  });
+  describe('GET /users/42', function() {
+    it('should return habits of selected user', function(done) {
+      chai.request(server)
+      .get('/users/42')
+      .end(function(err, res) {
+      res.should.have.status(200);
       //res.should.be.json; // jshint ignore:line
       // res.body.should.be.a('array');
-      // res.body.length.should.equal(4);
-      // res.body[0].should.have.property('name');
-      // res.body[0].name.should.equal('Suits');
-      // res.body[0].should.have.property('channel');
-      // res.body[0].channel.should.equal('USA Network');
-      // res.body[0].should.have.property('genre');
-      // res.body[0].genre.should.equal('Drama');
-      // res.body[0].should.have.property('rating');
-      // res.body[0].rating.should.equal(3);
-      // res.body[0].should.have.property('explicit');
-      // res.body[0].explicit.should.equal(false);
+      res.body.length.should.equal(1);
+      res.body[0].should.have.property('habit_name');
+      res.body[0].name.should.equal('water');
+      res.body[0].should.have.property('current_value');
+      res.body[0].channel.should.equal(0);
+      res.body[0].should.have.property('target_value');
+      res.body[0].genre.should.equal(2000);
+      res.body[0].should.have.property('frequency');
+      res.body[0].rating.should.equal(3);
+      res.body[0].should.have.property('start_date');
+      res.body[0].explicit.should.equal(1589760000);
+      res.body[0].should.have.property('end_date');
+      res.body[0].explicit.should.equal(1589846399);
+      res.body[0].should.have.property('streak');
+      res.body[0].explicit.should.equal(0);
+      res.body[0].should.have.property('completed');
+      res.body[0].explicit.should.equal(false);
+          
       done();
       });
     });

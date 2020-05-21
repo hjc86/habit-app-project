@@ -37,6 +37,7 @@ router.post('/users', function (req, res, next) {
 })
 
 router.get('/users', function (req, res, next){
+    console.log("GET REQUEST RECIEVED");
     db.getAllUsers()
     .then(function(users){
         res.status(200).json(users);

@@ -18,3 +18,5 @@ server.get('/ping', (req,res) => {
 server.use('/', index)
 
 server.listen(process.env.PORT || 3001);
+
+module.exports = server;

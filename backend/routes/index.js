@@ -229,7 +229,7 @@ router.put('/habits', function(req, res, next){ /////// Trying to copy username/
                 next(error);
             }) 
         } else{
-            res.send("A habit with that habit ID does not exist")
+            res.send({errorMessage: "A habit with that habit ID does not exist"})
         }
     })
     .catch(function(error){

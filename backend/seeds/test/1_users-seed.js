@@ -20,7 +20,7 @@ exports.seed = function(knex) {
         {
           username: 'username4',
           password: '123'
-        },
+        }
      
       ]);
     });

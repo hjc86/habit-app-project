@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import '../css/Dashboard.css'
 import Row from 'react-bootstrap/Row'
+import Spinner from 'react-bootstrap/Spinner'
 
 
 class Dashboard extends React.Component {
@@ -72,20 +73,20 @@ class Dashboard extends React.Component {
 
   render(){
     console.log(this.state.accountData);
-    return this.state.data == null ? 'Loading...' : (
-        
+    return this.state.data == null ? <div className="spinner" > <Spinner animation="border" variant="dark" /></div> : (
       <div>
+
         <Navbar id="navbar" bg="dark" variant="dark">
         <Navbar.Brand>
           HabitCheck
         </Navbar.Brand>
           <Nav>
+          <Button variant="dark" href="https://github.com/richardderoure/habit-app" target="blank">About</Button>
+          {'    '}
           <Button variant="dark" onClick={this.handleClickAccount}>Account</Button>
           {'    '}
           <Button variant="dark" onClick={this.handleClickLogout}>Logout</Button>
-          {'    '}
-          <Button variant="dark" href="https://github.com/richardderoure/habit-app" target="blank">About</Button>
-          {'    '}
+         
           </Nav>
           <Button className="create-button" variant="primary" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
 
@@ -108,11 +109,11 @@ class Dashboard extends React.Component {
           username = {this.state.accountData.username}
           password = {this.state.accountData.password}
         />
-
+        {this.state.data.length == 0 ? <div className="no-habits">You don't have any habits - create one using the button in the navbar!</div> : 
         <div className="habits-container">
           {this.state.data.map(data => <Habit data = {data} updateState = {this.updateState} />)}   {/*send data for a habit as a prop*/}
         </div>
-
+        }
       </div>
     );
   }

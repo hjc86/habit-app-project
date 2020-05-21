@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 1em;
+  align-content: space-between;
 }
 
 .navbar {
@@ -11,5 +12,18 @@
 .create-button{
     display: flex;
     margin-left: auto;
+    border-radius: 1em !important;
 }
-    
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.no-habits{
+  display: flex;
+  font-size: 2em;
+  justify-content: center;
+  margin-top: 3em;
+}

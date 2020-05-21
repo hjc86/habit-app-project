@@ -160,6 +160,7 @@ class Habits extends React.Component {
         let dayGrammar = "day"
         let frequencyGrammar = "";
         let streak = this.props.data.streak;
+        let streakText;
 
         if(now >=100){
             variant="success"
@@ -173,11 +174,14 @@ class Habits extends React.Component {
 
         if(this.state.completed==1){
             complete=<TiTick/> 
+            
         }
 
         if(streak>0){
+            streakText=`You're currently on a ${streak} day streak! `
             onFire=<FaFire/>
         } else {
+            streakText=`Your streak is currently ${streak} `
             onFire=<BsFillCloudFill/>
         }
 
@@ -193,6 +197,8 @@ class Habits extends React.Component {
             dayGrammar="days"
             frequencyGrammar = this.props.data.frequency
         }
+
+    
     
         
 
@@ -203,25 +209,20 @@ class Habits extends React.Component {
             <div className="habit-box">
     
 
-                <h6>{activityGrammar()} at least {unitGrammar} {timeGrammar} every {frequencyGrammar} {dayGrammar} {complete}   </h6>
-                
-                {/* <h6>{this.props.data.habit_name}</h6> */}
-                <span>{<></>} </span>
+                <h4>{activityGrammar()} at least {unitGrammar} {timeGrammar} every {frequencyGrammar} {dayGrammar}    </h4>
+                {/* {complete} */}
+                <h5>{streakText}{onFire}</h5> 
 
-
-               
-                <h6>You're on a {this.props.data.streak} day streak! {onFire}</h6> 
-                
-
-
-                {calcTimeLeft()} days left to complete your habit!
+                <h5>{calcTimeLeft()} days left to complete your habit!</h5>
                 
                 
                 <div className="habit-buttons">
-                <Button variant="outline-dark" onClick={this.handleClickComplete}><BsCheckBox/></Button>
-                <Button  variant="outline-dark" onClick={() => this.setState({ updateShow: true })}> <BsFillBarChartFill/></Button> 
-                <Button variant="outline-dark" onClick={() => this.setState({ editShow: true })}> <BsPencilSquare/></Button>
                 
+                    <Button  variant="dark" onClick={this.handleClickComplete}><BsCheckBox/></Button>
+                    <Button  variant="dark" onClick={() => this.setState({ updateShow: true })}> <BsFillBarChartFill/></Button> 
+                    <Button variant="dark" onClick={() => this.setState({ editShow: true })}> <BsPencilSquare/></Button>
+
+
                 </div>
 
                 <ProgressBar striped now={now} variant={variant} label={`${now}%`}/> 

@@ -4,9 +4,11 @@
     background-position: center;
     height: 100vh;
     background-color: #17f9f2;
-    background-image: linear-gradient(315deg, #17f9f2 0%, #b0f9a9 74%);
+    background-image: linear-gradient(315deg, #17eaf9 0%, #b2f8ab 74%);
     background-attachment: fixed;
     overflow-y: scroll;
+    /* font-family: 'Open Sans', sans-serif; */
+
 
 }
 .title{

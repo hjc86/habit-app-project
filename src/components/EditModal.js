@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import '../css/Modal.css';
 import AlertMessage from './Alert'
-import { BsXCircleFill, BsCheckAll } from "react-icons/bs";
+import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
 
 class EditModal extends React.Component {
     constructor(props) {
@@ -128,8 +128,8 @@ render(){
         </Modal.Body>
         <Modal.Footer>
           {/* <Button variant = "secondary" onClick={this.props.onHide}>Close</Button>  */}
-          <Button variant= "primary" onClick={this.handleSubmit}><BsCheckAll/></Button>
-          <Button variant = "danger" onClick={this.handleClickDelete}><BsXCircleFill/></Button>
+          <Button variant= "primary" onClick={this.handleSubmit}>Submit <BsCheckCircle/></Button>
+          <Button variant = "danger" onClick={this.handleClickDelete}>Delete <BsFillTrashFill/></Button>
 
         </Modal.Footer>
         </div>

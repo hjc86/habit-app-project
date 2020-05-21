@@ -92,12 +92,15 @@ class LogIn extends React.Component {
     render(){
         return (
             <div className="login-container">
-                <h1 className="title">HabitChecker</h1>
+                <h1 className="title">
+                     HabitChecker
+                    {/* <img src="https://image.flaticon.com/icons/svg/463/463574.svg" className="habit-logo"/>  */}
+                    </h1>
                     <div className="formDiv">
                         <Form className="form" >
-                            <Form.Label className="login-text">Username:</Form.Label>
+                            {/* <Form.Label className="login-text">Username:</Form.Label> */}
                             <Form.Control required className="input" type="text" placeholder="Enter username" onChange={this.handleChangeUsername}/>
-                            <Form.Label className="login-text">Password:</Form.Label>
+                            {/* <Form.Label className="login-text">Password:</Form.Label> */}
                             <Form.Control required  className="input" type="password" placeholder="Enter password" onChange={this.handleChangePassword}/>
                             <div className="button-container">
                             <Button variant="primary" type="submit" className="button" onClick={this.handleClickLogIn}>Login</Button> 

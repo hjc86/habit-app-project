@@ -1,14 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Monoton&display=swap');
+
 .form {
     display: flex;
     flex-direction: column;
     width: 30vw;
     margin: 10px;
     align-items:center;
-    
-    
-    
-    
-    
+    justify-items:center;
 }
 
 .formDiv {
@@ -20,10 +18,29 @@
     margin-left: auto;
     margin-right: auto;
     align-items: center;
-    padding: 20px;
+    justify-items:center;
+    padding: 1em;
+    flex-direction: column;
 }
-
 
 .button{
     margin: 1em;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    font-size: 4em;
+    padding:1em;
+    font-family: 'Acme', sans-serif;
+}
+
+.input{
+    margin: 1em;
+    border-style: none;
+    border-radius: 1em;
+}
+
+.alert-container{
+    display: flex;
 }

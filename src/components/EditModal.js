@@ -3,13 +3,16 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import AlertMessage from './Alert';
-import '../css/Modal.css'
+import '../css/Modal.css';
+import AlertMessage from './Alert'
 
-class HabitModal extends React.Component {
+class EditModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            habit_name: this.props.data.habit_name,
+            target_value: this.props.data.target_value,
+            frequency: this.props.data.frequency,
             message: null,
             alertShow: false
         }
@@ -35,45 +38,51 @@ handleFrequencyChange = (e) => {
     this.setState({ frequency: frequency })
 }
 
-handleSubmit = async (e) => {
-    e.preventDefault();
+handleClickDelete = async (event) =>{
+    event.preventDefault();
+    const url = 'http://localhost:3001/habits';
+    const response = await fetch(url, {
+        method: 'delete',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id: this.props.data.id})
+    })
+    this.props.updateState();
+    this.props.onHide();
+}
 
-    let start_date = new Date(this.state.start_date).getTime() / 1000;
-    let end_date = this.state.frequency * 86400 + start_date;
+handleSubmit = (e) => {
+    this.setState({alertShow: false});
+    e.preventDefault();
 
     const url = 'http://localhost:3001/habits';
     fetch(url, {
-        method: 'post',
+        method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            user_id: this.props.user_id,
+            id: this.props.data.id,
             habit_name: this.state.habit_name,
-            current_value: 0,
-            target_value: this.state.target_value,
-            frequency: this.state.frequency,
-            start_date: start_date,
-            end_date : end_date,
-            streak: 0,
-            completed: false
+            target_value: this.state.target_value
             })
         })
         .then(response => response.json())
         .then(data =>{
             if(data.successMessage){
+                this.setState({alertShow: false});
                 this.props.onHide();
                 this.props.updateState();
-            } else if(data.errorMessage){
+            }
+            else if(data.errorMessage){
                 this.setState({message: data.errorMessage, alertShow: true})
-            } else {
+            }
+            else{
                 console.log(data);
             }
         })
 }
 
 render(){
-    let todaysDate = new Date()
-    let formattedTodaysDate = todaysDate.getDate() + "/" + (todaysDate.getMonth() + 1) + "/" + todaysDate.getFullYear()
-   
+    console.log(this.state)
+    console.log(this.state.habit_name)
     return (
       <Modal
         {...this.props}
@@ -83,49 +92,48 @@ render(){
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Create new habit
+            Edit Habit details
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form>
-                <Form.Group as={Row} onChange={this.handleNameChange}>
+                <Form.Group as={Row} onChange={this.handleNameChange} >
                     <Form.Label>
-                        Activity
+                        Habit Name
                     </Form.Label>
-                    <Form.Control type="text" placeholder="Enter habit name" />
+                    <Form.Control type="text" defaultValue={this.props.data.habit_name}/>
                 </Form.Group>  
                 <Form.Group as={Row} onChange={this.handleTargetChange}>
                     <Form.Label>
                         Target Value
                     </Form.Label>
-                    <Form.Control type="number" placeholder="Enter target value" />
+                    <Form.Control type="number" defaultValue={this.props.data.target_value} />
                 </Form.Group>  
-                <Form.Group as={Row} onChange={this.handleDateChange}>
-                    <Form.Label>
-                        Start Date
-                    </Form.Label>
-                    <Form.Control type="date" defaultValue={formattedTodaysDate}/>
-                </Form.Group>     
-                <Form.Group as={Row} onChange={this.handleFrequencyChange}>
+                {/* <Form.Group as={Row} onChange={this.handleFrequencyChange}>
                     <Form.Label>
                         Frequency (days)
                     </Form.Label>
-                    <Form.Control type="number" placeholder="Enter frequency" />
-                </Form.Group>          
+                    <Form.Control type="number" defaultValue={this.props.data.frequency} />
+                </Form.Group>           */}
+
+
 
             </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
           <Button variant= "primary" onClick={this.handleSubmit}>Submit</Button>
+          <Button variant = "danger" onClick={this.handleClickDelete}>Delete</Button>
+
         </Modal.Footer>
-        
         <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
-        
       </Modal>
     );
   }
 }
+  
+  
+  
+  
 
-
-export default HabitModal;
+export default EditModal;

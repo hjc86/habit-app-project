@@ -26,8 +26,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test-orig": "react-scripts test",
-    "test": "mocha",
+    "test": "react-scripts test",
+    "test-server": "mocha",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

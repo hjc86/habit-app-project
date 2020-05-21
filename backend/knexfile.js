@@ -2,31 +2,31 @@
 
 module.exports = {
 
-  development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './db/habit_db.sqlite3'
-    },
-
-    migrations: {
-      directory: __dirname+'/migrations'
-    },
-    seeds: {
-      directory:'./seeds'
-    }
+development: {
+  client: 'sqlite3',
+  connection: {
+    filename: './db/habit_db.sqlite3'
   },
+
+  migrations: {
+    directory: __dirname +'/migrations'
+  },
+  seeds: {
+    directory:__dirname+ '/seeds/development'
+  }
+},
 
 test: {
   client: 'sqlite3',
   connection: {
-    filename: __dirname+ 'habit_db_test.sqlite3'
+    filename: ':memory:'
   },
 
   migrations: {
-    directory:  __dirname+'/migrations'
+    directory:  __dirname + '/migrations'
   },
   seeds: {
-    directory:'./seeds/test'
+    directory: __dirname + '/seeds/test'
   }
 
 }

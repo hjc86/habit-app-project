@@ -16,7 +16,7 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.listen(process.env.PORT || 3001);
 
 
-// server.use('/', index)
+server.use('/', index)
 
 
 
@@ -24,18 +24,18 @@ server.listen(process.env.PORT || 3001);
 //     return res.send("hello")
 // })
 
-server.get('/users', function (req, res, next){
-    //let users = "hello"
-    db.getAllUsers()
-    .then(res.send("success"))
+// server.get('/users', function (req, res, next){
+//     //let users = "hello"
+//     db.getAllUsers()
+//     .then(res.send("success"))
     
-    // .then(function(users){
-    //     res.status(200).json(users);
-    // })
-    // .catch(function(error){
-    //     next(error);
-    // });
-})
+//     // .then(function(users){
+//     //     res.status(200).json(users);
+//     // })
+//     // .catch(function(error){
+//     //     next(error);
+//     // });
+// })
 
 // server.listen(process.env.PORT || 3001);
 

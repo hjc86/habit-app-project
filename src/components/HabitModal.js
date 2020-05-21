@@ -90,7 +90,7 @@ render(){
             <Form>
                 <Form.Group as={Row} onChange={this.handleNameChange}>
                     <Form.Label>
-                        Habit Name
+                        Activity
                     </Form.Label>
                     <Form.Control type="text" placeholder="Enter habit name" />
                 </Form.Group>  

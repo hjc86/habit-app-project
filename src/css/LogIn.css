@@ -7,7 +7,6 @@
     margin: 10px;
     align-items:center;
     justify-items:center;
-    
 }
 
 .formDiv {
@@ -22,9 +21,7 @@
     justify-items:center;
     padding: 1em;
     flex-direction: column;
-
 }
-
 
 .button{
     margin: 1em;

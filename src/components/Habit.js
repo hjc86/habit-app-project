@@ -1,3 +1,4 @@
+
 import React from "react";
 import Button from 'react-bootstrap/Button'
 import EditModal from './EditModal'
@@ -5,6 +6,9 @@ import UpdateModal from './UpdateModal'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Card from  'react-bootstrap/Card'
 import {  FaFire, FaMeteor} from 'react-icons/fa';
+import '../css/Habit.css'
+// import WordPOS from 'C:\\Users\\HJC\\Documents\\futureproof_code\\habit-app\\public\\dist\\wordpos.min.js'
+
 
 import {
 
@@ -128,9 +132,33 @@ class Habits extends React.Component {
     }
 
     render () {
-     
+ 
+        
         const now = parseInt((this.props.data.current_value/this.props.data.target_value)*100);
         let variant;
+        let complete;
+        let onFire;
+
+        let calcTimeLeft = () =>{
+            let timeLeft = parseInt((this.props.data.end_date - (new Date().getTime() / 1000))/(24*60*60))
+            return timeLeft
+        } 
+
+        let activityGrammar =()=>{
+            let word_array = this.props.data.habit_name.split(" ")
+            for (const word of word_array){
+                console.log("==>", word)
+                if(word.includes("ing")){
+                    return word.split("ing")
+                }
+            }
+            return this.props.data.habit_name
+        }
+
+        let timeGrammar = "time";
+        let unitGrammar = this.props.data.target_value;
+        let dayGrammar = "day"
+        let frequencyGrammar = "";
 
         if(now >=100){
             variant="success"
@@ -142,13 +170,36 @@ class Habits extends React.Component {
             variant="danger"
         }
 
+        if(this.state.completed==1){
+            complete=<TiTick/> 
+        }
+
+        if(now>100){
+            onFire=<FaFire/>
+        }
+
+        if(this.props.data.target_value>1){
+            timeGrammar="times"
+        }
+        else{
+            unitGrammar= "once"
+            timeGrammar=""
+        }
+
+        if(this.props.data.frequency > 1){
+            dayGrammar="days"
+            frequencyGrammar = this.props.data.frequency
+        }
+    
+        
+
+    
+        
 
         return (
             <div className="habit-box">
-                
-                
-                                
-                <Card style={{ width: '18rem' }}>
+    
+                {/* <Card style={{ width: '10rem'}}>
                     <Card.Body>
                         <Card.Title>{this.props.data.habit_name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
@@ -157,25 +208,32 @@ class Habits extends React.Component {
                         the card's content.
                         </Card.Text>
                         <Button onClick={() => this.setState({ updateShow: true })}> Add Progress</Button> 
-                        {/* <Card.Button>Card Link</Card.Button> */}
+                
                         <Card.Link href="#">Another Link</Card.Link>
                     </Card.Body>
-                </Card>
-   
+                </Card> */}
 
-  
-                {/* <h3>{this.props.data.habit_name}</h3> */}
-                {/* <h2>Habit ID: {this.props.data.id}</h2> */}
-                {/* <h2>Completed: {this.props.data.completed}</h2> */}
-                {/* <h2>Streak: {this.props.data.streak}</h2> */}
-
-
-
-                {/* <h6> start time:  {this.convertToDateTime(this.props.data.start_date)} </h6>
-                <h6> end time: {this.convertToDateTime(this.props.data.end_date)} </h6>
-                <br>
+                <h6>{activityGrammar()} at least {unitGrammar} {timeGrammar} every {frequencyGrammar} {dayGrammar}    </h6>
                 
-                </br>
+                
+                {/* <h6>{this.props.data.habit_name}</h6> */}
+                <span>  {complete}{onFire}{<></>} </span>
+                {calcTimeLeft()} days left to make it a habbit
+
+
+               
+                {/* <h6>Habit ID: {this.props.data.id}</h6> */}
+                {/* <h6>Completed: {this.props.data.completed}</h6> */}
+                
+                <h6>Streak: {this.props.data.streak}</h6> 
+                
+                {/* <h6> start time:  {this.convertToDateTime(this.props.data.start_date)} </h6>
+                <h6> end time: {this.convertToDateTime(this.props.data.end_date)} </h6> */}
+                
+
+
+
+                {/* </br>
                 <FaFire/>
                 <TiTick/>
                 <GrRun/>
@@ -188,23 +246,20 @@ class Habits extends React.Component {
                 <br>
                 
                 </br>
+                 */}
                 
-                
-                <IconContext.Provider value={{ color: "red", className: "global-class-name" }}>
+                {/* <IconContext.Provider value={{ color: "red", className: "global-class-name" }}>
                 <div>
                     <FaFire />
                 </div>
-                </IconContext.Provider>
+                </IconContext.Provider> */}
        
                 <Button onClick={this.handleClickComplete}><TiTick/></Button>
                 <Button onClick={() => this.setState({ updateShow: true })}> Add Progress</Button> 
                 <Button onClick={() => this.setState({ editShow: true })}> <GrEdit/></Button>
                 
-                <ProgressBar now={now} variant={variant} label={`${now}%`}/> */}
+                <ProgressBar now={now} variant={variant} label={`${now}%`}/> 
                 
-           
-
-
 
 
                 <EditModal

@@ -84,8 +84,11 @@ class Dashboard extends React.Component {
           {'    '}
           <Button variant="dark" onClick={this.handleClickLogout}>Logout</Button>
           {'    '}
-          <Button className="justify-content-right" variant="info" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
+          <Button variant="dark" href="https://github.com/richardderoure/habit-app" target="blank">About</Button>
+          {'    '}
           </Nav>
+          <Button className="create-button" variant="primary" onClick={() => this.setState({ modalShow: true })}> Create new habit!</Button>
+
         </Navbar>
         
   
@@ -109,6 +112,7 @@ class Dashboard extends React.Component {
         <div className="habits-container">
           {this.state.data.map(data => <Habit data = {data} updateState = {this.updateState} />)}   {/*send data for a habit as a prop*/}
         </div>
+
       </div>
     );
   }

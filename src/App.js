@@ -1,8 +1,6 @@
 import React from 'react';
 import './css/App.css';
-import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 import LogIn from "./components/LogIn";
-import Habits from "./components/Habits";
 import Dashboard from './containers/Dashboard';
 
 
@@ -22,7 +20,10 @@ class App extends React.Component {
 
   render() {
     
-    return this.state.userID !== null ? <Dashboard setID = {this.setID} userID = {this.state.userID}/> : <LogIn setID = {this.setID} />
+    return this.state.userID !== null ? 
+    <div className="App"><Dashboard setID = {this.setID} userID = {this.state.userID}/></div> 
+    : 
+    <div className="App"><LogIn setID = {this.setID} /></div>
 
     
   }

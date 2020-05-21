@@ -1,0 +1,36 @@
+.habit-box {
+  background-color: antiquewhite;
+  display: flex; 
+  flex-direction: column;
+  flex: 1 0 21%; /*explanation below */
+  max-width: 300px;
+  min-width: 300px;   
+  max-height: 300px;
+  min-height: 300px;
+  margin: 25px;
+  height: 200px;
+  border: solid 2px lightblue;
+  border-radius: 3%;
+  padding: 5px
+}
+
+.double-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}

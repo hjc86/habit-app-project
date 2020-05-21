@@ -217,7 +217,7 @@ class Habits extends React.Component {
                 
                 
                 {/* <h6>{this.props.data.habit_name}</h6> */}
-                <span>  {complete}{onFire}{<></>} </span>
+                <span>{complete}{onFire}{<></>} </span>
                 {calcTimeLeft()} days left to make it a habbit
 
 

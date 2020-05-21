@@ -85,18 +85,36 @@ router.get('/users/:id', function (req, res, next){
     });
 })
 
+// router.delete('/users', function(req, res, next){ ////////////////////////////////////// OLD ROUTE DONT DELETE
+//     let id = req.body.id;
+//     db.deleteUser(id)
+//         .then(function(users){
+//             res.send(`User deleted with id: ${id}`)
+//         })
+//         .catch(function(error){
+//         next(error);
+//         });
+//     db.deleteAllHabits(id)
+//         .then(function(users){
+//             res.send(`Habits deleted with user id: ${id}`)
+//         })
+//         .catch(function(error){
+//         next(error);
+//         });
+// })
+
 router.delete('/users', function(req, res, next){
     let id = req.body.id;
     db.deleteUser(id)
         .then(function(users){
-            res.send(`User deleted with id: ${id}`)
+            res.send({message: `User deleted with id: ${id}`})
         })
         .catch(function(error){
         next(error);
         });
     db.deleteAllHabits(id)
         .then(function(users){
-            res.send(`Habits deleted with user id: ${id}`)
+            res.send({message: `Habits deleted with user id: ${id}`})
         })
         .catch(function(error){
         next(error);
@@ -144,6 +162,7 @@ router.put('/users', function(req, res, next){
         }
     })
     .catch(function(error){
+        res.send(errorMessage);
         next(error);
     })
     )
@@ -174,7 +193,7 @@ router.delete('/habits', function(req, res, next){
     let id = req.body.id;
     db.deleteHabit(id)
         .then(function(habits){
-            res.send(`Habit deleted with id: ${id}`)
+            res.send({successMessage: `Habit deleted with id: ${id}`}) ////////     THIS USED TO SEND STRING
         })
         .catch(function(error){
             next(error);

@@ -103,8 +103,8 @@ class LogIn extends React.Component {
                             {/* <Form.Label className="login-text">Password:</Form.Label> */}
                             <Form.Control required  className="input" type="password" placeholder="Enter password" onChange={this.handleChangePassword}/>
                             <div className="button-container">
-                            <Button variant="primary" type="submit" className="button" onClick={this.handleClickLogIn}>Login</Button> 
-                            <Button variant="light" type="submit" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
+                            <Button variant="primary" type="submit" id="login-btn" className="button" onClick={this.handleClickLogIn}>Login</Button> 
+                            <Button variant="light" type="submit" id="create-btn" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
                             </div>
                         </Form>  
                         <AlertMessage className="alert-container" variant={this.state.variant} message={this.state.message} show={this.state.alertShow} toggleShow={this.toggleAlertShow}/>

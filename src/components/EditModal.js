@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import '../css/Modal.css';
 import AlertMessage from './Alert'
+import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
 
 class EditModal extends React.Component {
     constructor(props) {
@@ -40,6 +41,8 @@ handleFrequencyChange = (e) => {
 
 handleClickDelete = async (event) =>{
     event.preventDefault();
+    let confirm1 = window.confirm("Are you sure you want to do this? This cannot be undone.");
+    if(confirm1){
     const url = 'http://localhost:3001/habits';
     const response = await fetch(url, {
         method: 'delete',
@@ -48,6 +51,7 @@ handleClickDelete = async (event) =>{
     })
     this.props.updateState();
     this.props.onHide();
+    }
 }
 
 handleSubmit = (e) => {
@@ -86,13 +90,15 @@ render(){
     return (
       <Modal
         {...this.props}
-        size="lg"
+        
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        
       >
+        <div className="modal-body">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Edit Habit details
+            Edit {this.props.data.habit_name} details
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -121,11 +127,12 @@ render(){
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
-          <Button variant= "primary" onClick={this.handleSubmit}>Submit</Button>
-          <Button variant = "danger" onClick={this.handleClickDelete}>Delete</Button>
+          {/* <Button variant = "secondary" onClick={this.props.onHide}>Close</Button>  */}
+          <Button variant= "primary" onClick={this.handleSubmit}>Submit <BsCheckCircle/></Button>
+          <Button variant = "danger" onClick={this.handleClickDelete}>Delete <BsFillTrashFill/></Button>
 
         </Modal.Footer>
+        </div>
         <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
       </Modal>
     );

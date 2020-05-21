@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import '../css/Modal.css';
 import AlertMessage from './Alert';
+import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
 
 class AccountModal extends React.Component {
     constructor(props) {
@@ -105,6 +106,7 @@ render(){
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
+        <div className="modal-body">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Edit account details
@@ -131,11 +133,12 @@ render(){
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
-          <Button variant= "primary" onClick={this.handleSubmit}>Save Changes</Button>
-          <Button variant = "danger" onClick={this.handleClickDelete}>Delete Data</Button>
+          {/* <Button variant = "secondary" onClick={this.props.onHide}>Close</Button>  */}
+          <Button variant= "primary" onClick={this.handleSubmit}>Save Changes <BsCheckCircle/></Button>
+          <Button variant = "danger" onClick={this.handleClickDelete}>Delete Data <BsFillTrashFill/></Button>
         </Modal.Footer>
         <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
+        </div>
       </Modal>
     );
   }

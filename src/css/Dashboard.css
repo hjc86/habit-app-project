@@ -1,17 +1,29 @@
 .habits-container{
   display: flex;
-  /* align-items: center; */
-  /* justify-content: center; */
   flex-wrap: wrap;
-  /* min-height: 100%; */
-  /* padding: 3% 10% 0% 10%; */
-  /* margin:8% 12.5% 10% 16%; */
-  /* margin:12.5% 12.5% 12.5% 12.5%; */
-  margin: 0% 0% 0 2%;
-  /* border: solid 2px lightgray */
-  }
+  margin: 1em;
+  align-content: space-between;
+}
 
 .navbar {
-  min-height: 100px;
-  }
-    
+  min-height: 4em;
+}
+
+.create-button{
+    display: flex;
+    margin-left: auto;
+    border-radius: 1em !important;
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.no-habits{
+  display: flex;
+  font-size: 2em;
+  justify-content: center;
+  margin-top: 3em;
+}

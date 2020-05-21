@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import '../css/Modal.css'
+import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
 
 class UpdateModal extends React.Component {
     constructor(props) {
@@ -84,10 +85,11 @@ class UpdateModal extends React.Component {
         return (
         <Modal
             {...this.props}
-            size="lg"
+            
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
+            <div className="modal-body"> 
             <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
                 Update habit
@@ -104,9 +106,9 @@ class UpdateModal extends React.Component {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-            <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
-            <Button variant= "primary" onClick={this.handleSubmit}>Submit</Button>
+            <Button variant= "primary" onClick={this.handleSubmit}>Submit <BsCheckCircle/></Button>
             </Modal.Footer>
+            </div>
         </Modal>
         );
     }

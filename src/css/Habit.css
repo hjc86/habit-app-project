@@ -1,8 +1,8 @@
-.habit-box {
+/* .habit-box {
   background-color: antiquewhite;
   display: flex; 
   flex-direction: column;
-  flex: 1 0 21%; /*explanation below */
+  flex: 1 0 21%; explanation below
   max-width: 300px;
   min-width: 300px;   
   max-height: 300px;
@@ -12,7 +12,39 @@
   border: solid 2px lightblue;
   border-radius: 3%;
   padding: 5px
+} */
+
+
+.habit-box{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1em;
+  margin: 1em;
+  /* background-color: rgb(0,0,0,0.2); */
+  background-color: #f8f8ffb3;
+  border-radius: 1em;
+  width: 22%;
+  height: 18em;
+  box-shadow: 3px 3px 2px grey;
+
 }
+
+h6{
+  font-size: 1.2em !important;
+}
+
+h5{
+  font-size: 1em !important;
+
+}
+.habit-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1em 0em 1em 0em;
+}
+
 
 .double-column {
   display: flex;
@@ -34,3 +66,6 @@
   flex-basis: 100%;
   flex: 1;
 }
+
+
+

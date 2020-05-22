@@ -71,7 +71,7 @@ Achieved yesterday:
 To Achieve today:
 * Have a no habits msg showing on dashboard if no habits
 * Fix error where we go back to login screen on enter of the ‘update amount’ modal
-* Add a ok box to confirm habit delets
+* Add a ok box to confirm habit deletes
 * Testing
   * Backend : enzyme and jest
   * React: enzyme and jest

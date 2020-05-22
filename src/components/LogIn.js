@@ -87,7 +87,7 @@ class LogIn extends React.Component {
         return (
             <div className="login-container">
                 <h1 className="title">
-                     HabitChecker
+                     HabitCheck
                     </h1>
                     <div className="formDiv">
                         <Form className="form" >

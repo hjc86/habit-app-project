@@ -17,10 +17,12 @@
 
 .spinner{
   display: flex;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   
 }
+
 .no-habits{
   display: flex;
   font-size: 2em;

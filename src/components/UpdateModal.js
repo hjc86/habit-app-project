@@ -96,6 +96,7 @@ class UpdateModal extends React.Component {
                         </Form.Label>
                         <Form.Control defaultValue={0} type="number" />
                     </Form.Group>  
+
                 </Form>
             </Modal.Body>
             <Modal.Footer>

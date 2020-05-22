@@ -1,8 +1,9 @@
 # Habit-App
 ## Installation Instructions:
 ## User Stories:
-https://github.com/richardderoure/habit-app/blob/master/images/userStories.png
-![Alt text](relative/path/to/userStories.png?raw=true "Title")
+
+![alt text](https://github.com/richardderoure/habit-app/blob/master/images/userStories.png?raw=true)
+
 ## Day 1
 
 ## Day 2

@@ -1,4 +1,5 @@
 # Habit-App
+![alt text](https://github.com/richardderoure/habit-app/blob/master/images/HabitChecker.png?raw=true)
 ## Installation Instructions:
 ## User Stories:
 

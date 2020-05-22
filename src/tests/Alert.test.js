@@ -6,8 +6,9 @@ import Alert from 'react-bootstrap/Alert'
 
 
 describe('AlertMessage', () => {
-    it('renders bootstrap alert', () =>{
-        const wrapper = shallow(<AlertMessage/>)
-        expect(wrapper.find('Alert')).toEqual(1);
+    it('renders bootstrap alert if show="true"', () =>{
+        const wrapper = mount(<AlertMessage message={"Test alert message"} show={"true"}/>)
+        expect(wrapper.find('#alert').exists()).toBe(true);
+        
     })
 })

@@ -43,26 +43,27 @@ We decided to first implement back-end functionality as a 4.
 ### Standup
 Achieved: created database, created all routes, login page (create account, login page), all query functions (knex)
 Want to achieve:
-* Plan (and create) dashboard container components https://wireframe.cc/r5PP0d
+* Plan (and create) dashboard container components
 * Include a redirect to dashboard on login success
-* Make password characters asterix DONE  
+* Make password characters asterix   
 
 Blockers: working as a group as at the moment no sensible way to fork 
 * Pair 1: modals for add new habit component DONE
 * Pair 2: dashboard to setup and display relevant components, correct linking and correct transfer of state
 
-
-### End of Day Update
-
 ## Day 3
 ### Standup
+Achieved yesterday: 
+* Created dashboard container components https://wireframe.cc/r5PP0d
+* Include a redirect to dashboard on login success
+* Make password characters asterix 
+
 To achieve today:
 * Add alert messages 
 * Add Data validation to create new account and update account functions
 * General bug fixes and error checking
 * Habit ‘tile’ data display of the following: completed, streak, over-completion
 * Add habit tile information display based on grammar  
-### End of Day Update
 
 ## Day 4
 ### Standup
@@ -90,9 +91,6 @@ Create dummy data for seeding tables
 * Pairs:
   * 1 => Testing what they can Helder, Matt
   * 2 => Style Richard, Medyen
-
-
-### End of Day Update
 
 ## Day 5
 ### Standup

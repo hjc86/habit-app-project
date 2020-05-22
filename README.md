@@ -7,10 +7,10 @@ Habit Checker allows users to personalise and track their own habits using an in
 
 1. Download/Pull the repository onto your machine.
 2. Open a new terminal and navigate into habit-app
-3. Run npm install
-4. Once installed, run npm start
+3. Run `npm install`
+4. Once installed, run `npm start`
 5. Open a second terminal and navigate into backend
-6. Run npx nodemon server.js
+6. Run `npx nodemon server.js`
 7. On your browser, if not done so automatically, open http://localhost:3000
 8. Use postman with http://localhost:3001 to test server routes
 9. To run front end tests, run npm test from within habit-app terminal
@@ -43,7 +43,7 @@ We decided to first implement back-end functionality as a 4.
 ### Standup
 Achieved: created database, created all routes, login page (create account, login page), all query functions (knex)
 Want to achieve:
-* plan  (and do) dashboard container components https://wireframe.cc/r5PP0d
+* Plan (and create) dashboard container components https://wireframe.cc/r5PP0d
 * Include a redirect to dashboard on login success
 * Make password characters asterix DONE  
 
@@ -81,10 +81,10 @@ To Achieve today:
   * Appropriate size for habit tile buttons
 Create dummy data for seeding tables
 * Blockers:
-  * Willing to test :(
+  * Willingness to test :(
 * Pairs:
-  * 1 => testing what they can helder, matt
-  * 2 => style richard, medyen
+  * 1 => Testing what they can Helder, Matt
+  * 2 => Style Richard, Medyen
 
 
 ### End of Day Update
@@ -92,7 +92,7 @@ Create dummy data for seeding tables
 ## Day 5
 ### Standup
 Achieved yesterday:
-* Added back-end testing using mocha, chai. Coverage checking done using Istanbul. >80% testing coverage
+* Added back-end testing using Mocha, Chai. Coverage checking done using Istanbul. >80% testing coverage
 * Added front-end testing using enzyme and jest. Low testing coverage
 * Added a lot more styling.
   * Better colouring

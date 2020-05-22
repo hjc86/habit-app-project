@@ -6,6 +6,7 @@ import UpdateModal from './UpdateModal'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Card from  'react-bootstrap/Card'
 import {  FaFire, FaMeteor} from 'react-icons/fa';
+import { BsFillBarChartFill, BsCheckBox, BsPencilSquare, BsFillCloudFill } from 'react-icons/bs';
 import '../css/Habit.css'
 // import WordPOS from 'C:\\Users\\HJC\\Documents\\futureproof_code\\habit-app\\public\\dist\\wordpos.min.js'
 
@@ -133,7 +134,6 @@ class Habits extends React.Component {
 
     render () {
  
-        
         const now = parseInt((this.props.data.current_value/this.props.data.target_value)*100);
         let variant;
         let complete;
@@ -159,23 +159,30 @@ class Habits extends React.Component {
         let unitGrammar = this.props.data.target_value;
         let dayGrammar = "day"
         let frequencyGrammar = "";
+        let streak = this.props.data.streak;
+        let streakText;
 
         if(now >=100){
             variant="success"
         }
         else if(now >= 80 ){
-            variant="warning"
+            variant="info"
         }
         else{
-            variant="danger"
+            variant="info"
         }
 
         if(this.state.completed==1){
             complete=<TiTick/> 
+            
         }
 
-        if(now>100){
+        if(streak>0){
+            streakText=`You're currently on a ${streak} day streak! `
             onFire=<FaFire/>
+        } else {
+            streakText=`Your streak is currently ${streak} `
+            onFire=<BsFillCloudFill/>
         }
 
         if(this.props.data.target_value>1){
@@ -190,6 +197,8 @@ class Habits extends React.Component {
             dayGrammar="days"
             frequencyGrammar = this.props.data.frequency
         }
+
+    
     
         
 
@@ -199,67 +208,25 @@ class Habits extends React.Component {
         return (
             <div className="habit-box">
     
-                {/* <Card style={{ width: '10rem'}}>
-                    <Card.Body>
-                        <Card.Title>{this.props.data.habit_name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                        <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-                        </Card.Text>
-                        <Button onClick={() => this.setState({ updateShow: true })}> Add Progress</Button> 
-                
-                        <Card.Link href="#">Another Link</Card.Link>
-                    </Card.Body>
-                </Card> */}
 
-                <h6>{activityGrammar()} at least {unitGrammar} {timeGrammar} every {frequencyGrammar} {dayGrammar}    </h6>
+                <h4>{activityGrammar()} at least {unitGrammar} {timeGrammar} every {frequencyGrammar} {dayGrammar}    </h4>
+                {/* {complete} */}
+                <h5>{streakText}{onFire}</h5> 
+
+                <h5>{calcTimeLeft()} days left to complete your habit!</h5>
                 
                 
-                {/* <h6>{this.props.data.habit_name}</h6> */}
-                <span>{complete}{onFire}{<></>} </span>
-                {calcTimeLeft()} days left to make it a habbit
+                <div className="habit-buttons">
+                
+                    <Button  variant="dark" onClick={this.handleClickComplete}><BsCheckBox/></Button>
+                    <Button  variant="dark" onClick={() => this.setState({ updateShow: true })}> <BsFillBarChartFill/></Button> 
+                    <Button variant="dark" onClick={() => this.setState({ editShow: true })}> <BsPencilSquare/></Button>
 
 
-               
-                {/* <h6>Habit ID: {this.props.data.id}</h6> */}
-                {/* <h6>Completed: {this.props.data.completed}</h6> */}
-                
-                <h6>Streak: {this.props.data.streak}</h6> 
-                
-                {/* <h6> start time:  {this.convertToDateTime(this.props.data.start_date)} </h6>
-                <h6> end time: {this.convertToDateTime(this.props.data.end_date)} </h6> */}
-                
-
-
-
-                {/* </br>
-                <FaFire/>
-                <TiTick/>
-                <GrRun/>
-                <GiBlaster/>
-                <DiMeteor/>
-                <aMeteor/>
-                <GiFragmentedMeteor/>
-                <GiBurningMeteor/>
-                < WiMeteor/>
-                <br>
-                
-                </br>
-                 */}
-                
-                {/* <IconContext.Provider value={{ color: "red", className: "global-class-name" }}>
-                <div>
-                    <FaFire />
                 </div>
-                </IconContext.Provider> */}
-       
-                <Button onClick={this.handleClickComplete}><TiTick/></Button>
-                <Button onClick={() => this.setState({ updateShow: true })}> Add Progress</Button> 
-                <Button onClick={() => this.setState({ editShow: true })}> <GrEdit/></Button>
-                
-                <ProgressBar now={now} variant={variant} label={`${now}%`}/> 
-                
+
+                <ProgressBar striped now={now} variant={variant} label={`${now}%`}/> 
+
 
 
                 <EditModal

@@ -92,16 +92,19 @@ class LogIn extends React.Component {
     render(){
         return (
             <div className="login-container">
-                <h1 className="title">HabitChecker</h1>
+                <h1 className="title">
+                     HabitChecker
+                    {/* <img src="https://image.flaticon.com/icons/svg/463/463574.svg" className="habit-logo"/>  */}
+                    </h1>
                     <div className="formDiv">
                         <Form className="form" >
-                            <Form.Label>Username</Form.Label>
+                            {/* <Form.Label className="login-text">Username:</Form.Label> */}
                             <Form.Control required className="input" type="text" placeholder="Enter username" onChange={this.handleChangeUsername}/>
-                            <Form.Label>Password</Form.Label>
+                            {/* <Form.Label className="login-text">Password:</Form.Label> */}
                             <Form.Control required  className="input" type="password" placeholder="Enter password" onChange={this.handleChangePassword}/>
-                            <div>
-                            <Button type="submit" className="button" onClick={this.handleClickLogIn}>Login</Button> 
-                            <Button type="submit" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
+                            <div className="button-container">
+                            <Button variant="primary" type="submit" id="login-btn" className="button" onClick={this.handleClickLogIn}>Login</Button> 
+                            <Button variant="light" type="submit" id="create-btn" className="button" onClick={this.handleClickCreate}>Create Account</Button> 
                             </div>
                         </Form>  
                         <AlertMessage className="alert-container" variant={this.state.variant} message={this.state.message} show={this.state.alertShow} toggleShow={this.toggleAlertShow}/>

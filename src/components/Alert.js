@@ -10,7 +10,7 @@ class AlertMessage extends React.Component {
     render(){
         if (this.props.show) {
         return (
-            <Alert variant={this.props.variant}>
+            <Alert id="alert" variant={this.props.variant}>
                 <Alert.Heading>{this.props.message}</Alert.Heading>
             </Alert>
         );

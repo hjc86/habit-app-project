@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import AlertMessage from './Alert';
 import '../css/Modal.css'
+import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
 
 class HabitModal extends React.Component {
     constructor(props) {
@@ -81,6 +82,7 @@ render(){
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
+        <div className="modal-body">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Create new habit
@@ -116,10 +118,10 @@ render(){
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant = "secondary" onClick={this.props.onHide}>Close</Button> 
-          <Button variant= "primary" onClick={this.handleSubmit}>Submit</Button>
+          {/* <Button variant = "secondary" onClick={this.props.onHide}>Close</Button>  */}
+          <Button variant= "primary" onClick={this.handleSubmit}>Submit <BsCheckCircle/></Button>
         </Modal.Footer>
-        
+        </div>
         <AlertMessage show={this.state.alertShow} variant="danger" message={this.state.message}/>
         
       </Modal>

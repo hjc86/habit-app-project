@@ -113,13 +113,13 @@ router.put('/users', function(req, res, next){
     let currentUsername;
     let currentPassword;
 
-    if(req.body.password == '' && req.body.password == ''){
+    if(req.body.password == '' && req.body.user == '' || req.body.password == null && req.body.user == null ){
         res.send({errorMessage: 'Enter a username and password'})
-    } else if(req.body.username == ''){
+    } else if(req.body.username == '' || req.body.username == null){
         res.send({errorMessage: 'Enter a username'})
-    } else if(req.body.password == ''){
+    } else if(req.body.password == '' || req.body.password == null){
         res.send({errorMessage: 'Enter a password'})
-    }
+    } else {
     
     db.getSingleUser(id)
     .then(function(users){
@@ -147,6 +147,7 @@ router.put('/users', function(req, res, next){
         next(error);
     })
     )
+}
 })
 
 /////////////////////////////////HABIT ROUTES

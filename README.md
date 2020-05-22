@@ -74,10 +74,10 @@ Achieved yesterday:
 * Habit ‘tile’ data display of the following: completed, streak, over-completion
 * Added dynamic-ish habit tile information display based on grammar  
 
-To Achieve today:
+To achieve today:
 * Have a no habits message showing on the dashboard if no present habits
 * Fix error where we go back to login screen on enter of the ‘update amount’ modal
-* Add a ok box to confirm habit delets
+* Add a warning box to confirm habit delete
 * Testing
   * Backend : Enzyme and Jest
   * React: Enzyme and Jest

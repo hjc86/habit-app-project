@@ -38,24 +38,19 @@ class LogIn extends React.Component {
         .then(data =>{
 
             if(data.errorMessage){
-                console.log(data.errorMessage);
                 this.setState({
                     message: data.errorMessage,
                     variant: "danger"
                 })
                 this.toggleAlertShow();
             } else if(data.successMessage){
-                console.log(data.successMessage)
                 this.setState({
                     message: data.successMessage,
                     variant: "success"
                 })
                 this.toggleAlertShow();
             } else if(data.defaultError){
-                console.log(data.defaultError)
                 this.toggleAlertShow();
-            } else {
-                console.log(data)
             }
         })
     }
@@ -78,7 +73,6 @@ class LogIn extends React.Component {
                 this.setState({userID: data});
                 this.props.setID(this.state.userID);
             } else{ 
-                console.log(data.errorMessage)
                 this.setState({
                     message: data.errorMessage,
                     variant: "danger"
@@ -94,13 +88,10 @@ class LogIn extends React.Component {
             <div className="login-container">
                 <h1 className="title">
                      HabitChecker
-                    {/* <img src="https://image.flaticon.com/icons/svg/463/463574.svg" className="habit-logo"/>  */}
                     </h1>
                     <div className="formDiv">
                         <Form className="form" >
-                            {/* <Form.Label className="login-text">Username:</Form.Label> */}
                             <Form.Control required className="input" type="text" placeholder="Enter username" onChange={this.handleChangeUsername}/>
-                            {/* <Form.Label className="login-text">Password:</Form.Label> */}
                             <Form.Control required  className="input" type="password" placeholder="Enter password" onChange={this.handleChangePassword}/>
                             <div className="button-container">
                             <Button variant="primary" type="submit" id="login-btn" className="button" onClick={this.handleClickLogIn}>Login</Button> 

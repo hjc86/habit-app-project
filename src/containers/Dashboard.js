@@ -6,7 +6,6 @@ import Habit from '../components/Habit'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import '../css/Dashboard.css'
-import Row from 'react-bootstrap/Row'
 import Spinner from 'react-bootstrap/Spinner'
 
 
@@ -27,16 +26,13 @@ class Dashboard extends React.Component {
 
   handleClickLogout = () =>{
     localStorage.setItem('data', null);
-    console.log("local storage", localStorage.getItem('data'));
     this.props.setID(null);
   }
 
   handleClickAccount = async (event) =>{
     event.preventDefault();
-    console.log("HANDLE CLICK ACCOUNT");
     
     if(this.props.userID !== null){
-      console.log("Calling account details from handle click")
       this.getAccountDetails();
     }
     
@@ -65,14 +61,12 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount(){
-    console.log(this.props.userID)
     if(this.props.userID !== null){
       this.getAccountDetails();
     }
   }
 
   render(){
-    console.log(this.state.accountData);
     return this.state.data == null ? <div className="spinner" > <Spinner animation="border" variant="dark" /></div> : (
       <div>
 
@@ -109,9 +103,9 @@ class Dashboard extends React.Component {
           username = {this.state.accountData.username}
           password = {this.state.accountData.password}
         />
-        {this.state.data.length == 0 ? <div className="no-habits">You don't have any habits - create one using the button in the navbar!</div> : 
+        {this.state.data.length === 0 ? <div className="no-habits">You don't have any habits - create one using the button in the navbar!</div> : 
         <div className="habits-container">
-          {this.state.data.map(data => <Habit data = {data} updateState = {this.updateState} />)}   {/*send data for a habit as a prop*/}
+          {this.state.data.map(data => <Habit data = {data} updateState = {this.updateState} />)} 
         </div>
         }
       </div>

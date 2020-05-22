@@ -16,8 +16,8 @@ describe('Dashboard', () => {
     // })
 
     it('renders navbar', () => {
-        const wrapper = mount(<Dashboard/> data={{}})
-        expect(wrapper.find('Navbar')).toEqual(1);
+        const wrapper = mount(<Dashboard/>)
+        expect(wrapper.find('Navbar')).toEqual({});
     })
 
     

@@ -16,6 +16,17 @@ exports.seed = function(knex) {
           streak: 0,
           completed: false
         },
+        {
+          user_id: 1,
+          habit_name: 'exercise',
+          current_value: 0,
+          target_value: 5,
+          frequency: 3,
+          start_date: 1589760000,
+          end_date: 1589846399,
+          streak: 0,
+          completed: true
+        }
      
       ]);
     });

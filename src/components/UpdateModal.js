@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import '../css/Modal.css'
-import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
+import {  BsCheckCircle } from "react-icons/bs";
 
 class UpdateModal extends React.Component {
     constructor(props) {
@@ -29,7 +29,6 @@ class UpdateModal extends React.Component {
         await this.setState({ current_value: this.state.current_value + this.state.unitDone })
         await this.state.current_value / this.props.data.target_value >= 1 ? this.setState({completed: 1}) : this.setState({completed: 0});
         
-        console.log("This should be updateModal target value = ", this.state.target_value);
         const url = 'http://localhost:3001/habits';
         await fetch(url, {
             method: 'put',
@@ -45,13 +44,11 @@ class UpdateModal extends React.Component {
 
         await this.setState({unitDone: 0});
         await this.props.updateState();
-        console.log("check that completed value is 1 here ==> ", this.state.completed)
         await this.whenCompleteOrUpdate();
         this.props.onHide();
     }
 
     whenCompleteOrUpdate = async () => {
-        console.log("whencompletoripdate() has been triggered complete should be ", this.state.completed)
 
         let currentTime = new Date().getTime() / 1000;
         let currentStreak = this.props.data.streak;
@@ -64,24 +61,20 @@ class UpdateModal extends React.Component {
             let end_date = this.props.data.frequency * 86400 + start_date;
 
             const url = 'http://localhost:3001/habits';
-            const response = await fetch(url, {
+            await fetch(url, {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({id: this.props.data.id, start_date: start_date, end_date: end_date, streak: currentStreak, habit_name: this.props.data.habit_name, target_value: this.props.data.target_value})
             })     
 
             await this.props.updateState();
-            console.log("streak has been updated");
-        }else {
-            console.log("streak hasn't been updated")
         }
+        
 
     }
 
 
     render(){
-        console.log(this.state)
-        console.log(this.state.habit_name)
         return (
         <Modal
             {...this.props}

@@ -4,40 +4,10 @@ import Button from 'react-bootstrap/Button'
 import EditModal from './EditModal'
 import UpdateModal from './UpdateModal'
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import Card from  'react-bootstrap/Card'
-import {  FaFire, FaMeteor} from 'react-icons/fa';
+import {  FaFire } from 'react-icons/fa';
 import { BsFillBarChartFill, BsCheckBox, BsPencilSquare, BsFillCloudFill } from 'react-icons/bs';
+import { TiTick } from 'react-icons/ti';
 import '../css/Habit.css'
-// import WordPOS from 'C:\\Users\\HJC\\Documents\\futureproof_code\\habit-app\\public\\dist\\wordpos.min.js'
-
-
-import {
-
-        GiBlaster,
-    
-        GiFragmentedMeteor,
-        GiBurningMeteor} from 'react-icons/gi';
-
-import {GrRun,GrEdit}  from "react-icons/gr";
-        
-
-import { TiTick, 
-} from 'react-icons/ti';
-    
-import {
-
-        DiMeteor,} from 'react-icons/di';
-        
-        
-        import {
-
-            WiMeteor,} from 'react-icons/wi';
-
-
-
-
-import { IconContext } from "react-icons";
- 
 
 
 class Habits extends React.Component {
@@ -54,7 +24,6 @@ class Habits extends React.Component {
     }
 
     handleClickComplete = async (event) =>{
-        console.log("click complete happened, complete =",this.props.data.completed)
         event.preventDefault();
         const url = 'http://localhost:3001/habits';
         await fetch(url, {
@@ -62,13 +31,12 @@ class Habits extends React.Component {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id: this.props.data.id, current_value: this.props.data.target_value, completed: 1, habit_name: this.props.data.habit_name, target_value: this.props.data.target_value})
         })        
-    
         await this.props.updateState();
-        console.log("in handle click completed after updateStae claled; val of completed: ", this.props.data.completed)
-
-        await this.whenCompleteOrUpdate();
         await this.setState({current_value: this.props.data.target_value})
-        console.log("props should be update==>", this.props.data.completed, "streak: ", this.props.data.streak);
+        await this.whenCompleteOrUpdate();
+        await this.props.updateState();
+
+
     }
 
     whenCompleteOrUpdate = async () => {
@@ -76,59 +44,46 @@ class Habits extends React.Component {
         let currentTime = new Date().getTime() / 1000;
         let currentStreak = this.props.data.streak;
         
-        (currentTime > this.props.data.start_date && currentTime < this.props.data.end_date && this.props.data.completed === 1) ?  // if current time is later then start date && current time is before end date then
-        currentStreak++ : currentStreak = this.props.data.streak;
+        // (currentTime > this.props.data.start_date && currentTime < this.props.data.end_date && this.props.data.completed === 1) ? 
+        // currentStreak++ : currentStreak = this.props.data.streak;
 
-        if( this.props.data.completed === 1){
+        if( this.props.data.completed === 1 && currentTime > this.props.data.start_date && currentTime < this.props.data.end_date ){
+            currentStreak++;
             let start_date = this.props.data.end_date;
             let end_date = this.props.data.frequency * 86400 + start_date;
 
             const url = 'http://localhost:3001/habits';
-            const response = await fetch(url, {
+            await fetch(url, {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({id: this.props.data.id, start_date: start_date, end_date: end_date, streak: currentStreak, habit_name: this.props.data.habit_name, target_value: this.props.data.target_value})
             })     
-
             await this.props.updateState();
-            console.log("streak has been updated");
-        }else {
-            console.log("streak hasn't been updated")
-        }
 
+        
+        }
     }
 
 
     convertToDateTime=(unixtimestamp)=>{
-            // Unixtimestamp
-            // var unixtimestamp = document.getElementById('timestamp').value;
-            // Months array
+  
             var months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-           
             // Convert timestamp to milliseconds
             var date = new Date(unixtimestamp*1000);
-           
             // Year
             var year = date.getFullYear();
-           
             // Month
             var month = months_arr[date.getMonth()];
-           
             // Day
             var day = date.getDate();
-           
             // Hours
             var hours = date.getHours();
-           
             // Minutes
             var minutes = "0" + date.getMinutes();
-           
             // Seconds
             var seconds = "0" + date.getSeconds();
-           
             // Display date time in MM-dd-yyyy h:m:s format
             var convdataTime = month+'-'+day+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-            
             return convdataTime
     }
 
@@ -147,7 +102,6 @@ class Habits extends React.Component {
         let activityGrammar =()=>{
             let word_array = this.props.data.habit_name.split(" ")
             for (const word of word_array){
-                console.log("==>", word)
                 if(word.includes("ing")){
                     return word.split("ing")
                 }
@@ -161,6 +115,8 @@ class Habits extends React.Component {
         let frequencyGrammar = "";
         let streak = this.props.data.streak;
         let streakText;
+        let timeLeft;
+        let timeLeftText;
 
         if(now >=100){
             variant="success"
@@ -172,9 +128,14 @@ class Habits extends React.Component {
             variant="info"
         }
 
-        if(this.state.completed==1){
-            complete=<TiTick/> 
-            
+        if(this.props.data.completed===1){
+            complete=<TiTick/>
+            timeLeft="";
+            timeLeftText = "You've completed your habit for the current time period!"
+
+        } else {
+            timeLeft = calcTimeLeft();
+            timeLeftText = " days left to complete your habit!";
         }
 
         if(streak>0){
@@ -198,36 +159,21 @@ class Habits extends React.Component {
             frequencyGrammar = this.props.data.frequency
         }
 
-    
-    
-        
-
-    
-        
-
         return (
             <div className="habit-box">
     
 
-                <h4>{activityGrammar()} at least {unitGrammar} {timeGrammar} every {frequencyGrammar} {dayGrammar}    </h4>
-                {/* {complete} */}
+                <h4>{activityGrammar()} at least {unitGrammar} {timeGrammar} every {frequencyGrammar} {dayGrammar} {complete}   </h4>
                 <h5>{streakText}{onFire}</h5> 
-
-                <h5>{calcTimeLeft()} days left to complete your habit!</h5>
-                
+                <h5>{timeLeft}{timeLeftText}</h5>
                 
                 <div className="habit-buttons">
-                
                     <Button  variant="dark" onClick={this.handleClickComplete}><BsCheckBox/></Button>
                     <Button  variant="dark" onClick={() => this.setState({ updateShow: true })}> <BsFillBarChartFill/></Button> 
-                    <Button variant="dark" onClick={() => this.setState({ editShow: true })}> <BsPencilSquare/></Button>
-
-
+                    <Button  variant="dark" onClick={() => this.setState({ editShow: true })}> <BsPencilSquare/></Button>
                 </div>
 
                 <ProgressBar striped now={now} variant={variant} label={`${now}%`}/> 
-
-
 
                 <EditModal
                     show={this.state.editShow}
@@ -245,9 +191,7 @@ class Habits extends React.Component {
                     data = {this.props.data}
                     current_value = {this.state.current_value}
                 />
-                
             </div>
-
         )
     }
 }

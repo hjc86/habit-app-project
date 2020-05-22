@@ -39,18 +39,18 @@ handleFrequencyChange = (e) => {
     this.setState({ frequency: frequency })
 }
 
-handleClickDelete = async (event) =>{
+handleClickDelete = (event) =>{
     event.preventDefault();
     let confirm1 = window.confirm("Are you sure you want to do this? This cannot be undone.");
     if(confirm1){
     const url = 'http://localhost:3001/habits';
-    const response = await fetch(url, {
+    fetch(url, {
         method: 'delete',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({id: this.props.data.id})
     })
-    this.props.updateState();
-    this.props.onHide();
+    .then(this.props.updateState())
+    .then(this.props.onHide())
     }
 }
 
@@ -78,15 +78,11 @@ handleSubmit = (e) => {
             else if(data.errorMessage){
                 this.setState({message: data.errorMessage, alertShow: true})
             }
-            else{
-                console.log(data);
-            }
+            
         })
 }
 
 render(){
-    console.log(this.state)
-    console.log(this.state.habit_name)
     return (
       <Modal
         {...this.props}
@@ -115,19 +111,13 @@ render(){
                     </Form.Label>
                     <Form.Control type="number" defaultValue={this.props.data.target_value} />
                 </Form.Group>  
-                {/* <Form.Group as={Row} onChange={this.handleFrequencyChange}>
-                    <Form.Label>
-                        Frequency (days)
-                    </Form.Label>
-                    <Form.Control type="number" defaultValue={this.props.data.frequency} />
-                </Form.Group>           */}
+               
 
 
 
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button variant = "secondary" onClick={this.props.onHide}>Close</Button>  */}
           <Button variant= "primary" onClick={this.handleSubmit}>Submit <BsCheckCircle/></Button>
           <Button variant = "danger" onClick={this.handleClickDelete}>Delete <BsFillTrashFill/></Button>
 

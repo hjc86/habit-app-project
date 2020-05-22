@@ -53,12 +53,9 @@ handleSubmit = async (e) => {
           }
           else if(data.errorMessage){
             this.setState({message: data.errorMessage, alertShow: true})
-          } else{
-            console.log(data);
-          }
+          } 
           
         })
-    // this.setState({message: response.errorMessage, alertShow: true})
     
 }
 
@@ -74,30 +71,20 @@ handleClickDelete = (event) =>{
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({id: this.props.user_id})
           })
-          // this.props.updateAccState();       
           .then(this.props.setID(null))
 
         }
     }  
 }
 
-// getAccountDetails = async () =>{
-//     const url = `http://localhost:3001/users/${this.props.user_id}`;
-//     const response = await fetch(url);
-//     const data = await response.json();
-//     this.setState({data: data});
-//     console.log(data);
-// }
+
 
 componentDidMount() {
-    console.log('componentDidMount fired');
-    // this.getAccountDetails();
 }
 
 
 render(){
 
-    console.log(this.state)
 
     return this.props.username == null ? 'Loading...' : (
       <Modal
@@ -118,22 +105,17 @@ render(){
                     <Form.Label>
                         Username
                     </Form.Label>
-                    {/* <Form.Control type="text" /> */}
-                    {/* <Form.Control type="text" defaultValue={this.state.data.username} /> */}
                     <Form.Control type="text" defaultValue={this.props.username} />
                 </Form.Group>  
                 <Form.Group as={Row} onChange={this.handlePasswordChange}>
                     <Form.Label>
                         Password
                     </Form.Label>
-                    {/* <Form.Control type="text" placeholder={"password"} /> */}
-                    {/* <Form.Control type="text" defaultValue={this.state.data.password} /> */}
                     <Form.Control type="text" defaultValue={this.props.password} />
                 </Form.Group>         
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button variant = "secondary" onClick={this.props.onHide}>Close</Button>  */}
           <Button variant= "primary" onClick={this.handleSubmit}>Save Changes <BsCheckCircle/></Button>
           <Button variant = "danger" onClick={this.handleClickDelete}>Delete Data <BsFillTrashFill/></Button>
         </Modal.Footer>

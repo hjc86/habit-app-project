@@ -27,7 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-server": "mocha --watch",
+    "test-server": "nyc --reporter=text mocha",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

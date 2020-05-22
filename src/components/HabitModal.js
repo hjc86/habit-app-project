@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import AlertMessage from './Alert';
 import '../css/Modal.css'
-import { BsFillTrashFill, BsCheckCircle } from "react-icons/bs";
+import { BsCheckCircle } from "react-icons/bs";
 
 class HabitModal extends React.Component {
     constructor(props) {
@@ -65,8 +65,6 @@ handleSubmit = async (e) => {
                 this.props.updateState();
             } else if(data.errorMessage){
                 this.setState({message: data.errorMessage, alertShow: true})
-            } else {
-                console.log(data);
             }
         })
 }
@@ -98,27 +96,27 @@ render(){
                 </Form.Group>  
                 <Form.Group as={Row} onChange={this.handleTargetChange}>
                     <Form.Label>
-                        Target Value
+                        Target Value 
                     </Form.Label>
                     <Form.Control type="number" placeholder="Enter target value" />
-                </Form.Group>  
+                </Form.Group> 
+                <Form.Group as={Row} onChange={this.handleFrequencyChange}>
+                    <Form.Label>
+                        Frequency (days)
+                    </Form.Label>
+                    <Form.Control type="number" placeholder="Enter frequency" />
+                </Form.Group>     
                 <Form.Group as={Row} onChange={this.handleDateChange}>
                     <Form.Label>
                         Start Date
                     </Form.Label>
                     <Form.Control type="date" defaultValue={formattedTodaysDate}/>
                 </Form.Group>     
-                <Form.Group as={Row} onChange={this.handleFrequencyChange}>
-                    <Form.Label>
-                        Frequency (days)
-                    </Form.Label>
-                    <Form.Control type="number" placeholder="Enter frequency" />
-                </Form.Group>          
+                     
 
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button variant = "secondary" onClick={this.props.onHide}>Close</Button>  */}
           <Button variant= "primary" onClick={this.handleSubmit}>Submit <BsCheckCircle/></Button>
         </Modal.Footer>
         </div>

@@ -1,5 +1,5 @@
-### Habit-App
-## Installation Instructions
+# Habit-App
+## Installation Instructions:
 ## User Stories:
 
 ## Day 1
